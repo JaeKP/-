@@ -1,15 +1,5 @@
 # function_map()
 
-## 목차
-
-1. [정의](#정의)
-2. [활용 예시](#활용-예시)
-	[int()](#int())
-	[.split()](#.split())
-	[.join()](#.join())
-
-
-
 ## map() 정의
 
 ```python
@@ -46,11 +36,8 @@ def map_function(func, items):
 val_a = ['1', '2', '3', '4', '5']
 val_b = map(int, val_a)
 
-print(list(val_b)) # map의 반환값은 map객체이기에 list나 tuple로 반환해야 한다. 
-      
-
-# 결과
-[1, 2, 3, 4, 5]
+# map의 반환값은 map객체이기에 list나 tuple로 반환해야 한다. 
+print(list(val_b)) # [1, 2, 3, 4, 5] 
 ```
 
 <br>
@@ -81,15 +68,9 @@ print(list(val_b)) # map의 반환값은 map객체이기에 list나 tuple로 반
 # 입력 값을 변수 두 개에 저장하기
 # 알고리즘 문제 풀이 때 자주 사용된다.
 
-a, b = input('숫자 두 개를 입력하시오: ').split() #지정된 구분자가 없기 때문에 입력받은 값을 띄어쓰기로 구분
-print( a, b,type(a), type(b) )
+a, b = input('숫자 두 개를 입력하시오: ').split() # 숫자 두 개를 입력하시오: 20 30
 
-
-#실행
-숫자 두 개를 입력하시오: 20 30
-    
-# 출력 
-20, 30, <class 'str'>, <class 'str'> 
+print( a, b,type(a), type(b) ) # 20, 30, <class 'str'>, <class 'str'> 
 ```
 
 <br>
@@ -97,15 +78,9 @@ print( a, b,type(a), type(b) )
 - **map을 사용하면 input()값을 일괄적으로 형 변환할 수 있다.** 
 
 ```python
-a, b = map (int, input('숫자 두 개를 입력하시오: ').split())
-print( a, b, type(a), type(b) )
+a, b = map (int, input('숫자 두 개를 입력하시오: ').split()) # 숫자 두 개를 입력하시오: 20 30
 
-
-#실행
-숫자 두 개를 입력하시오: 20 3
-    
-# 출력 
-20, 30, <class 'int'>, <class 'int'>
+print( a, b, type(a), type(b) ) # 20, 30, <class 'int'>, <class 'int'>
 ```
 
 <br>
@@ -122,17 +97,13 @@ val = ['1', '2', '3', '4']
 a = ''.join(val) # 구분자가 없음.
 b = ',\n'.join(val) # 구분자는  ,\n
 
-print(a, type(a))
-print(b, type(b))
+print(a, type(a)) # 1234 <class 'str'>
 
-
-
-#출력
-1234 <class 'str'>
-1,
-2,
-3,
-4 <class 'str'>
+print(b, type(b)) 
+# 1,
+# 2,
+# 3,
+# 4 <class 'str'>
 ```
 
 <br>
@@ -145,11 +116,7 @@ print(b, type(b))
  
  a = (''.join(map(str, val)))
  
- print(a, type(a))
- 
- 
- #출력 
- 12345 <class 'str'>
+ print(a, type(a)) # 12345 <class 'str'>
  ```
 
 <br>
