@@ -47,6 +47,8 @@ print(list(val_b)) # [1, 2, 3, 4, 5]
 > `문자열.split(sep=’구분자’, maxsplit=분할횟수)` 
 >
 > str클래스의 내부 함수로 특정문자를 기준으로 문자열을 분리시킨다. 
+>
+> 문자열을 일정한 규칙으로 잘라 리스트로 만들어 준다. 
 
 ```python
 # 기본: 띄워쓰기, 엔터 등을 인식해서 문자열을 분리.
@@ -59,7 +61,17 @@ print(list(val_b)) # [1, 2, 3, 4, 5]
 
 # 정해진 분할 횟수에 따라 특정 구분자를 지정해서 문자열을 분리한다.
 문자열.split('구분자', 분할횟수)
-문자열.split(sep=’구분자’, maxsplit=분할횟수)
+문자열.split(sep=’구분자’, maxsplit=분할횟수) # maxsplit의 기본 값은 -1이다.(제한없이 자른다)
+```
+
+<br>
+
+```python
+a = '안_녕_하_세_요'
+b = a.split('_')
+
+print(a, type(a)) # 안_녕_하_세_요 <class 'str'>
+print(b, type(b)) # ['안', '녕', '하', '세', '요'] <class 'list'>
 ```
 
 <br>
@@ -70,7 +82,7 @@ print(list(val_b)) # [1, 2, 3, 4, 5]
 
 a, b = input('숫자 두 개를 입력하시오: ').split() # 숫자 두 개를 입력하시오: 20 30
 
-print( a, b,type(a), type(b) ) # 20, 30, <class 'str'>, <class 'str'> 
+print( a, b, type(a), type(b) ) # 20, 30, <class 'str'>, <class 'str'> 
 ```
 
 <br>
