@@ -1,4 +1,4 @@
-# fuction_args_kwargs
+# [함수]args_kwargs
 
 ## 팩킹과 언패킹
 

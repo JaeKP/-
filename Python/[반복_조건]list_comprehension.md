@@ -1,4 +1,4 @@
-# list_comprehension
+# [반복_조건]list_comprehension
 
 ## comprehension
 

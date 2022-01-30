@@ -1,4 +1,4 @@
-# function_map()
+# [함수]map()
 
 ## map() 정의
 
