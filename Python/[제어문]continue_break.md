@@ -5,30 +5,24 @@
 > 이후 코드를 건너뛰고 반복문을 계속 실행한다. 
 
 ```python
-total = 0                                        # 합을 누적해 저장할 정수형 변수                           
+total = 0                                       # 합을 누적해 저장할 정수형 변수                           
 
-for n in range(1,101):                           # 1~100까지의 정수를 차례대로 변수 n에 대입
-    if n % 5  == 0:                              # n의 값이 5의 배수인지 검사하기 위해 나머지 연산자 사용
-        continue                                 # n의 값이 5의 배수이면 나머지 코드는 무시하고 for 반복문으로 다시 이동한다.              
-    total += n                                   # n의 값이 5의 배수가 아닐 때 변수 total에 값을 누적                                  
+for n in range(1,101):                          # 1~100까지의 정수를 차례대로 변수 n에 대입
+    if n % 5  == 0:                             # n의 값이 5의 배수인지 검사하기 위해 나머지 연산자 사용
+        continue                                # n의 값이 5의 배수이면 나머지 코드는 무시하고 for 반복문으로 다시 이동한다.              
+    total += n                                  # n의 값이 5의 배수가 아닐 때 변수 total에 값을 누적                                  
 
 
-print(f'5의 배수를 제외한 총합: {total}')           # 4000 // 접근할 항목이 없을 경우 for문을 빠져나와 print()함수 호출 
+print(f'5의 배수를 제외한 총합: {total}')          # 4000 // 접근할 항목이 없을 경우 for문을 빠져나와 print()함수 호출 
 ```
 
 <br>
 
 ```python
-for word in 'mamamoo':                          # 'mamamoo'문자열을 차례대로 변수 word에 대입
-    if word == 'm':                             # 문자열에 'm'이 있는지 검사하기 위해 관계 연산자 사용
-        continue                                # word의 값이 'm'이면 나머지 코드는 무시하고 for 반복문으로 다시 이동한다.
-    print(word)                                 # word의 값이 'm'이 아니면 출력한다. 
-    
-#출력
-a
-a
-o
-o
+for word in 'mamamoo':                         # 'mamamoo'문자열을 차례대로 변수 word에 대입
+    if word == 'm':                            # 문자열에 'm'이 있는지 검사하기 위해 비교 연산자 사용
+        continue                               # word의 값이 'm'이면 나머지 코드는 무시하고 for 반복문으로 다시 이동한다.
+    print(word)                                # a a o o  // word의 값이 'm'이 아니면 출력한다. 
 ```
 
 <br>
@@ -64,3 +58,16 @@ print('끝!')                 # word가 0 혹은 1과 같으면 while반복문�
 
 <br>
 
+```python
+# else문은 break로 인해 반복문을 이탈할 때 실행되지 않는다. 
+word = input('영어단어를 입력하시오: ')
+
+for word in word:                       # 사용자에게 전달받은 문자열을 차례대로 변수 n에 대입       
+    if word == 'm':                     # 변수 n이 'm'과 같은지 확인하는 비교 연산자 사용                                         
+        print('m이 있습니다 ^ㅁ^')        # 변수 n이 'm'과 같으면 print()실행
+        break                           # 변수 n이 'm'과 같으면  반복문 이탈
+else:
+    print('m이 없습니다 ㅠㅠ ')           # 문자열을 차례대로 'm'과 비교해서 확인을 해도 같지 않으면 print()실행
+```
+
+<br>
