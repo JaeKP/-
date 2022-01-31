@@ -12,12 +12,12 @@
 <br>
 
 ```python
-def recursive_function(): #재귀 함수 정의
+def recursive_function():      #재귀 함수 정의
 	print('재귀함수는 알고리즘 설계 및 구현에서 활용됩니다.')
-	recursive_function()  #자기 자신 호출하여 다시 recursive_function()을 실행
+	recursive_function()       #자기 자신 호출하여 다시 recursive_function()을 실행
     
     
-recursive_function() # 함수 호출
+recursive_function()           # 함수 호출
 ```
 
 ```python
@@ -44,14 +44,14 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 
 ```python
 def recursive_function(i): 
-    if i == 5: # 종료 조건 작성
-        return # return은 반환 값이 없어도 함수를 종료한다는 의미가 있음. 조건에 맞으면 함수를 종료시킴. 
+    if i == 5:               # 종료 조건 작성
+        return               # return은 반환 값이 없어도 함수를 종료한다는 의미가 있음. 조건에 맞으면 함수를 종료시킴. 
     else:
         print('재귀함수는 알고리즘 설계 및 구현에서 활용됩니다.')
     	recursive_function(i + 1)  # i+1을 하고 recursive_function()을 실행
     
     
-recursive_function(0) # 함수 호출
+recursive_function(0)        # 함수 호출
 ```
 
 ```python
@@ -60,7 +60,7 @@ def recursive_function(i):
         print('재귀함수는 알고리즘 설계 및 구현에서 활용됩니다.')
         recursive_function(i + 1) # 반복을 제어하기 위해 변수의 값 변경
         
-recursive_function(0) # 함수호출
+recursive_function(0)       # 함수호출
 ```
 
 <br>
@@ -99,9 +99,9 @@ while i < 5:
 
 ```python
 def factorial(num):
-    result = 1 #값을 저장하기위해 변수 설정
-    for i in range(1, num + 1):  #1 ~ n
-        result= result * i  #순회한 값을 곱해서 변수에 저장
+    result = 1                              #값을 저장하기위해 변수 설정
+    for i in range(1, num + 1):             #1 ~ n
+        result= result * i                  #순회한 값을 곱해서 변수에 저장
     return result
 ```
 
@@ -111,9 +111,9 @@ def factorial(num):
 
 ```python
 def factorial(num):
-    if num == 1:  # 종료조건을 설정
-        return 1 # num이 1이되면 1을 반환하고 재귀 호출 종료
-    return num * factorial(num -1 ) # num 이 1 이상이면 n과 함수에 n-1을 넣어 반한된 값을 곱함 
+    if num == 1:                           # 종료조건을 설정
+        return 1                           # num이 1이되면 1을 반환하고 재귀 호출 종료
+    return num * factorial(num -1 )        # num 이 1 이상이면 n과 함수에 n-1을 넣어 반한된 값을 곱함 
 ```
 
  <br>

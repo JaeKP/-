@@ -20,10 +20,9 @@
 #packing을 통해 변수에 여러 개의 데이터를 한번에 저장할 수 있다. 
 x, *y, z = 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
  
-print(x, type(x)) # 0 <class 'int'>
-print(y, type(y)) # [1, 2, 3, 4, 5, 6, 7, 8] <class 'list'>
-print(z, type(z)) # 9 <class 'int'>
-
+print(x, type(x))                      # 0 <class 'int'>
+print(y, type(y))                      # [1, 2, 3, 4, 5, 6, 7, 8] <class 'list'>
+print(z, type(z))                      # 9 <class 'int'>
 ```
 
 ```python
@@ -31,7 +30,7 @@ print(z, type(z)) # 9 <class 'int'>
 x = [1, 2, 3, 4, 5]
 y = 0, *x
 
-print(y, type(y)) # (0, 1, 2, 3, 4, 5) <class 'tuple'>
+print(y, type(y))                      # (0, 1, 2, 3, 4, 5) <class 'tuple'>
 ```
 
 <br>
@@ -56,24 +55,23 @@ def my_print(*args):
 
 a = 1, 2, 3
 
-my_print(1, 2, 3) # (1, 2, 3) <class 'tuple'> 3
-my_print(*a) # (1, 2, 3) <class 'tuple'> 3
+my_print(1, 2, 3)                     # (1, 2, 3) <class 'tuple'> 3
+my_print(*a)                          # (1, 2, 3) <class 'tuple'> 3
 
 
 # 위와 달리 튜플형태의 단일 인자를 매개변수로 전달한 것. 
-my_print(a) # ((1, 2, 3),) <class 'tuple'> 1
+my_print(a)                           # ((1, 2, 3),) <class 'tuple'> 1
  
 ```
 
  ```python
- # 활용
  def my_sum(*args):
      result = 0 
-     for arg in args:
+     for arg in args:               # 가변인자 args는 튜플 형태로 처리가 되기 때문에 iterable한 객체이다. 
          result += arg
      return result
  
- print(my_sum(1, 2, 3, 4, 5)) # 15
+ print(my_sum(1, 2, 3, 4, 5))       # 15
  ```
 
 <br>
@@ -82,7 +80,7 @@ my_print(a) # ((1, 2, 3),) <class 'tuple'> 1
 
 - 임의의 개수의 키워드 인자를 매개변수로 전달한다.
 
-- **`dictionnary`** 형태로 처리가 되며 매개면수 앞에 `**`로 표시를 한다. 
+- **`dictionnary`** 형태로 처리가 되며 매개변수 앞에 `**`로 표시를 한다. 
 
 - 딕셔너리의 key는 문자열 형태여야 한다. 
 
@@ -90,25 +88,48 @@ my_print(a) # ((1, 2, 3),) <class 'tuple'> 1
 def my_print(**kwargs):
     print(kwargs, type(kwargs), len(kwargs))
     
-a = {'one': 1, 'two': 2, 'three': 3 }
+a = {'one' = 1, 'two' = 2, 'thre'e = 3 }
 
 my_print(one = 1, two = 2, three = 3) # {'one': 1, 'two': 2, 'three': 3} <class 'dict'> 3
-my_print(**a) # {'one': 1, 'two': 2, 'three': 3} <class 'dict'> 3
 
-my_print(a) # TypeError: my_print() takes 0 positional arguments but 1 was given
+my_print(**a)                         # {'one': 1, 'two': 2, 'three': 3} <class 'dict'> 3
+my_print(a)                           # TypeError: my_print() takes 0 positional arguments but 1 was given
 ```
 
 ```python
-#활용
+def info(name, age, 주소):
+    return {'name': name, 'age': age, '주소': 주소}
+
+print(info(name ='홍길동', age =20, 주소 = '서울 어딘가'))   # {'name': '홍길동', 'age': 20, '주소': '서울 어딘가'}
+
+      
+# 키워드 가변 인자 활용하면 더 간단하게 딕셔너리를 만들 수 있다. 
 def info(**kwargs):
-    for key, value in kwargs.items():
-        print('{0} : {1}'.format(key, value) )
+    return kwargs
 
-x = {'name': '홍길동', 'age': 20 } 
-
-info(**x)  # x = {'name': '홍길동', 'age': 20 } 
+# 키워드 인자이기때문에 key로 사용될 값에 ''를 붙이지 않는다.  
+print(info(name ='홍길동', age =20, 주소 = '서울 어딘가'))   # {'name': '홍길동', 'age': 20, '주소': '서울 어딘가'}
 ```
 
 <br>
+
+```python
+# 키워드 가변인자는 dictionary 형태로 처리가 된다. 
+def info(**kwargs):
+    for index, value in kwargs.items():
+        print(f'내 {index}는 {value}이다.')
+    return 
+    
+info(이름 = '홍길동', 나이 = 20, 주소 = '서울 어딘가')
+'''
+----출력----
+내 이름는 홍길동이다.
+내 나이는 20이다.
+내 주소는 서울 어딘가이다.
+-----------
+'''
+```
+
+
 
 <br>

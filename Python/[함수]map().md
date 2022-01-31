@@ -36,8 +36,10 @@ def map_function(func, items):
 val_a = ['1', '2', '3', '4', '5']
 val_b = map(int, val_a)
 
+print(val_b, type(val_b))      # <map object at 0x0000023F2E9D4F10> <class 'map'>
+
 # map의 반환값은 map객체이기에 list나 tuple로 반환해야 한다. 
-print(list(val_b)) # [1, 2, 3, 4, 5] 
+print(list(val_b))             # [1, 2, 3, 4, 5] 
 ```
 
 <br>
@@ -61,7 +63,7 @@ print(list(val_b)) # [1, 2, 3, 4, 5]
 
 # 정해진 분할 횟수에 따라 특정 구분자를 지정해서 문자열을 분리한다.
 문자열.split('구분자', 분할횟수)
-문자열.split(sep=’구분자’, maxsplit=분할횟수) # maxsplit의 기본 값은 -1이다.(제한없이 자른다)
+문자열.split(sep=’구분자’, maxsplit=분할횟수)                 # maxsplit의 기본 값은 -1이다.(제한없이 자른다)
 ```
 
 <br>
@@ -70,8 +72,8 @@ print(list(val_b)) # [1, 2, 3, 4, 5]
 a = '안_녕_하_세_요'
 b = a.split('_')
 
-print(a, type(a)) # 안_녕_하_세_요 <class 'str'>
-print(b, type(b)) # ['안', '녕', '하', '세', '요'] <class 'list'>
+print(a, type(a))                                         # 안_녕_하_세_요 <class 'str'>
+print(b, type(b))                                         # ['안', '녕', '하', '세', '요'] <class 'list'>
 ```
 
 <br>
@@ -79,10 +81,9 @@ print(b, type(b)) # ['안', '녕', '하', '세', '요'] <class 'list'>
 ```python
 # 입력 값을 변수 두 개에 저장하기
 # 알고리즘 문제 풀이 때 자주 사용된다.
+a, b = input('숫자 두 개를 입력하시오: ').split()            # 숫자 두 개를 입력하시오: 20 30
 
-a, b = input('숫자 두 개를 입력하시오: ').split() # 숫자 두 개를 입력하시오: 20 30
-
-print( a, b, type(a), type(b) ) # 20, 30, <class 'str'>, <class 'str'> 
+print(a, b, type(a), type(b))                            # 20, 30, <class 'str'>, <class 'str'> 
 ```
 
 <br>
@@ -90,9 +91,9 @@ print( a, b, type(a), type(b) ) # 20, 30, <class 'str'>, <class 'str'>
 - **map을 사용하면 input()값을 일괄적으로 형 변환할 수 있다.** 
 
 ```python
-a, b = map (int, input('숫자 두 개를 입력하시오: ').split()) # 숫자 두 개를 입력하시오: 20 30
+a, b = map(int, input('숫자 두 개를 입력하시오: ').split())  # 숫자 두 개를 입력하시오: 20 30
 
-print( a, b, type(a), type(b) ) # 20, 30, <class 'int'>, <class 'int'>
+print(a, b, type(a), type(b))                            # 20, 30, <class 'int'>, <class 'int'>
 ```
 
 <br>
@@ -106,16 +107,22 @@ print( a, b, type(a), type(b) ) # 20, 30, <class 'int'>, <class 'int'>
 ```python
 val = ['1', '2', '3', '4']
 
-a = ''.join(val) # 구분자가 없음.
-b = ',\n'.join(val) # 구분자는  ,\n
+a = ''.join(val)           # 구분자가 없음.
+b = ',\n'.join(val)        # 구분자는  ,\n
 
-print(a, type(a)) # 1234 <class 'str'>
+print(a, type(a))          # 1234 <class 'str'>
 
-print(b, type(b)) 
-# 1,
-# 2,
-# 3,
-# 4 <class 'str'>
+print(b, type(b), sep = '\n') 
+
+'''
+----출력---- 
+1,
+2,
+3,
+4
+<class 'str'>
+------------
+'''
 ```
 
 <br>
@@ -124,11 +131,11 @@ print(b, type(b))
 - **list의 인자가 정수나 실수 map()활용해 형을 변환시켜야 한다.** 
 
  ```python
- val = [1, 2, 3, 4, 5]
+ val = [1, 2, 3, 4, 5]          # 1~5까지의 숫자로 이루어진 리스트
  
- a = (''.join(map(str, val)))
+ a = (''.join(map(str, val)))   # 리스트는 iterable하기때문에 str()을 직접 사용할 수 없음.
  
- print(a, type(a)) # 12345 <class 'str'>
+ print(a, type(a))              # 12345 <class 'str'>
  ```
 
 <br>
