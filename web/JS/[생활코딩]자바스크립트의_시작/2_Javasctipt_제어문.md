@@ -1,0 +1,328 @@
+# Javascript 제어문
+
+## 1. 비교 연산자
+
+> 조건문을 만들기 위해서는 먼저 조건을 만들 수 있어야 한다. 
+>
+> 조건을 만들기 위해 비교 연산자와 불리언을 활용할 수 있다. 
+
+- 비교 연산자를 통해서 두 값을 비교할 수 있다.
+- 비교한 결과를 불리언을 통해서 알아낼 수 있다. 
+
+```	html
+<body>
+  <h1>Comparision operators & Boolean</h1>
+  <h2>===</h2>
+  <h3>1===1</h3>
+  <script>
+    document.write(1===1);
+  </script>
+
+  <h3>1===2</h3>
+  <script>
+    document.write(1===2);
+  </script>
+
+  <h3>1&lt;2</h3>
+  <script>
+    document.write(1<2);
+  </script>
+
+  <h3>1&lt;2<h3>
+  <script>
+    document.write(1<2);
+  </script>
+
+  <h3>1&gt;2<h3>
+  <script>
+    document.write(1>2);
+  </script>
+
+  <h3>1>=2<h3>
+  <script>
+    document.write(1>=2);
+  </script>
+</body>
+```
+
+<br>
+
+<img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/adadf567-ed7c-4f72-ab33-ef4a9c8c2806/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220206%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220206T091126Z&X-Amz-Expires=86400&X-Amz-Signature=931cfb2c1bea8bb4b1f2fc1684e12bc8a3c273243b92c635073ae1bc837c9f1a&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject" style="zoom:90%">
+
+<br>
+
+## 2. 조건문
+
+> **조건문**이란 **프로그램이 조건에 따라서 다른 기능들이 다른 순서에 따라서 실행되도록 만들어주는 것**이다.
+
+<br>
+
+```html
+<body>
+  <h1>Conditional statements</h1>
+  <h2>Program</h2>
+  <script>
+    document.write("1<br>");
+    document.write("2<br>");
+    document.write("3<br>");
+    document.write("4<br>");
+  </script>
+
+  <!-- 실행의 순서가 바뀐다. -->
+  <h2>IF-true</h2>
+  <script>
+    document.write("1<br>");
+    if(true){
+      document.write("2<br>");
+    } else{
+      document.write("3<br>");
+    }
+    document.write("4<br>");
+  </script>
+
+  <h2>IF-false</h2>
+  <script>
+    document.write("1<br>");
+    if(false){
+      document.write("2<br>");
+    } else{
+      document.write("3<br>");
+    }
+    document.write("4<br>");
+  </script>  
+</body>
+```
+
+**`if(boolean){}else{}`**
+
+1. if문의 괄호 안에는 불리언 데이터 타입이 온다. 
+2. true이면 첫 번째 중괄호에 있는 코드가 실행되고, else의 중괄호에 있는 코드는 무시된다.
+3. 반대로 그 boolean이 false이면 else의 중괄호에 있는 코드가 실행되고 첫 번째 중괄호에 있는 코드가 무시된다.
+
+<br>
+
+```html
+<body>
+  <!-- 조건문을 사용하여 버튼을 클릭했을 때, value값에 따라 웹페이지에 변화를 준다. -->
+  <input id="night_day" type="button" value="night" onclick="
+  if(document.querySelector('#night_day').value === 'night'){
+    document.querySelector('body').style.backgroundColor = 'black';
+    document.querySelector('#night_day').value = 'day';
+  }else{
+    document.querySelector('body').style.backgroundColor = 'white';
+    document.querySelector('#night_day').value = 'night';
+  }
+  ">
+</body>
+```
+
+**`if(조건문){}else{}`**
+
+1. 비교 연산자를 활용하여 boolean데이터를 결과로 도출하는 조건문을 생성한다.
+2. boolean데이터의 결과에따라 웹사이트에 적용되는 동적인 변화를 기입한다.  
+
+<br>
+
+:pencil2:**refactoring**
+
+> 코드의 기능적인 면에서는 변화가 없이 비효율적인 코드를 효율적으로 만들어서 가독성을 높이고 유지보수가 쉽도록 만드는 것.
+
+```html
+<body>
+  <!-- this라는 키워드를 사용한다.-->
+  <!-- 변수를 활용하여 중복을 제거한다.  -->
+  <input type="button" value="night" onclick="
+  var target = document.querySelector('body');
+  if(this.value === 'night'){
+    target.style.backgroundColor = 'black';
+    this.value = 'day';
+  } else{
+    target.style.backgroundColor = 'white';
+    this.value = 'night';
+  }
+  ">
+</body>
+```
+
+- **`this`: 자기 자신을 가르키는 키워드**
+  - `this.value === 'night'`
+- **`var 변수명`: 변수 정의**
+  - `var target = document.querySelector('body')`
+  - 변수를 정의해서 사용하면, 중복이 제거되어 코드가 간결해진다.
+  - 또한 유지 보수가 용이하다. 
+
+<br>
+
+## 3. 배열
+
+> 프로그래밍에서도 많은 데이터를 종류별로 정리하는 방법이 필요하다.
+>
+> 배열이란 연관된 데이터를 보관하는 일종의 수납상자이다. 
+
+<br>
+
+```html
+<body>
+  <!-- 데이터를 수납하는 배열은 대괄호로 시작해서 대괄호로 끝난다. -->
+  <h1>Array</h1>
+  <h2>Syntax</h2>
+  <script>
+    var food = ["chicken", "pizza"];
+  </script>
+  
+    <!-- 인덱스를 활용하여 수납공간에 저장된 데이터를 추출할 수 있다.  -->
+  <h2>get</h2>
+  <script>
+    document.write(food[0]);
+    document.write(food[1]);
+  </script>
+  
+  <!-- .length는 배열의 길이를 알기위한 속성이다. -->
+  <h2>count</h2>
+  <script>
+    document.write(food.length);
+  </script>
+  
+  <!-- push()메서드는 데이터 추가할 수 있다.  -->
+  <h2>add</h2>
+  <script>
+    food.push('apple-jam');
+    food.push('bread');
+  </script>
+  
+  <h2>count</h2>
+  <script>
+    document.write(food.length)
+  </script>
+</body>
+```
+
+<img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/e7f79d92-5790-4a86-907f-2423df03ee3d/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220206%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220206T105545Z&X-Amz-Expires=86400&X-Amz-Signature=1d5789321291a9b69ad66592a7ae4492b7a6101ae2d6532951d2b38bf6dd35de&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject" style="zoom:90%">
+
+<br>
+
+메서드와 속성 참고자료 : https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+<br>
+
+## 4. 반복문
+
+> 프로그래밍을 하다 보면 같은 코드를 여러 번 반복해야 하는 경우가 생긴다.
+>
+> 이때 while반복문을 사용하면 편리하게 코드를 만들 수 있다. 
+
+<br>
+
+```html
+<body>
+  <h1>Loop</h1>
+  <ul>
+    <script>
+      document.write('<li>1</li>');
+      // 반복문은 실행 흐름을 제어 한다. 
+      // boolean데이터가 false가 되면 반복문은 종료된다. 
+      var i = 0;
+      while(i < 3){
+        document.write('<li>2</li>');
+        document.write('<li>3</li>');
+        // 종료조건을 만족하기 위한 코드
+        i = i + 1; 
+      }
+      document.write('<li>4</li>');
+  </script>
+  </ul>
+</body>
+```
+
+**`while(booldean데이터를 결과값으로 갖는 조건){반복할 코드}`**
+
+1. while(true)이면 중괄호 안의 코드가 반복된다.
+
+2. while(false)가 되면 반복이 종료된다. 
+
+3. 종료 조건이 없으면 무한루프가 발생하기 때문에 종료조건을 설정하는 것이 중요하다. 
+
+<br>
+
+### 배열과 반복문
+
+- 배열: 서로 연관된 데이터를 잘 정리정돈 하는 것  
+- 반복문: 순서대로 배열에 담겨 있는 데이터를 활용하여 자동화된 처리를 할 수 있는 문법. 
+
+=> 그래서 이 둘의 시너지가 좋다
+
+<br>
+
+```html
+<body>
+  <h1>Loop & Array</h1>
+  <script>
+    var food = ['chicken', 'pizza', 'apple-jam', 'bread', 'snack']
+  </script>
+  <h2>food</h2>
+  <ul>
+    <!-- 원소가 추가되거나 제거되면 원하지 않는 결과가 발생한다.-->
+    <script>
+      var i = 0;
+      while(i < 4){
+        document.write('<li>'+food[i]+'</li>');
+        i = i + 1;
+      }
+    </script>
+  </ul>
+    
+  <ul>
+    <!-- .length 속성을 이용하면 해결된다. -->
+    <script>
+      var i = 0;
+      while(i < food.length){
+        document.write('<li>'+food[i]+'</li>');
+        i = i + 1;
+      }
+    </script>
+  </ul>
+</body>
+```
+
+<br>
+
+<img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/96195e1d-84a3-4e55-b28f-59fbbe010baf/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220206%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220206T113501Z&X-Amz-Expires=86400&X-Amz-Signature=460b7691b724a1137603b35a63e553b752c9838ae3794407f3d09e68a503e748&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject" style="zoom:120%">
+
+<br>
+
+```html
+<body>
+  <input type="button" value="night" onclick="
+    var target = document.querySelector('body');
+    if(this.value === 'night'){
+      target.style.backgroundColor = 'black';
+      this.value = 'day';
+                                              
+      // 야간 모드 링크 색상을 변경
+      // querySelectorAll이 찾은 모든 a 태그를 배열 형태로 alist에 저장하게 된다.
+      var alist = document.querySelectorAll('a');
+      var i = 0
+      while(i < alist.length){
+        alist[i].style.color = 'powderblue';
+        i = i + 1
+      }
+    } else{
+      target.style.backgroundColor = 'white';
+      this.value = 'night';
+                                              
+      // 주간 모드 링크 색상을 변경
+      var alist = document.querySelectorAll('a');
+      var i = 0
+      while(i < alist.length){
+        alist[i].style.color = 'blue';
+        i = i + 1
+      }
+    }
+  "><br>
+  <a href="https://www.naver.com/">네이버</a>
+</body>
+
+```
+
+<br>
+
