@@ -121,7 +121,7 @@
 
 <br>
 
-:pencil2:**refactoring**
+📌 **refactoring**
 
 > 코드의 기능적인 면에서는 변화가 없이 비효율적인 코드를 효율적으로 만들어서 가독성을 높이고 유지보수가 쉽도록 만드는 것.
 
@@ -195,7 +195,7 @@
 
 <img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/e7f79d92-5790-4a86-907f-2423df03ee3d/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220206%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220206T105545Z&X-Amz-Expires=86400&X-Amz-Signature=1d5789321291a9b69ad66592a7ae4492b7a6101ae2d6532951d2b38bf6dd35de&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject" style="zoom:90%">
 
-메서드와 속성 참고자료 : https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array
+✏ 메서드와 속성 참고자료 : https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array
 
 <br>
 

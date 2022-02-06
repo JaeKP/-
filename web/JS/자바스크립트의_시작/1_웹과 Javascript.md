@@ -6,7 +6,7 @@
 >
 > 그러나, 사람들은 웹페이지에서도 게임처럼 동적으로 상호작용하기를 원하게 되었다.
 
-**정적인 웹페이지(html)를 사용자와 상호작용할 수 있는 동적인 웹페이지로 바꾸는 것이 `자바스크립트`다.**  
+**정적인 웹페이지(html)를 사용자와 상호작용할 수 있는 동적인 웹페이지로 바꾸는 것이 `자바스크립트`이다.**  
 
 <br>
 
@@ -14,12 +14,15 @@
 - 웹브라우저는 한번 화면에 출력되면 자기 자신을 바꿀 수 없다.
 - 그러나 자바스크립트를 이용하면 태그나 속성에 변화를 줄 수 있다.
 
-| Javascript                                                   | html                                                         |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 컴퓨터 언어<br />프로그래밍 언어                             | 컴퓨터 언어                                                  |
-| 동적이다.                                                    | 정적이다.                                                    |
-| 웹사이트 내에서 사용자와의 상호작용을 위해 만들어진 언어     | 웹브라우저를 통해 웹콘텐츠의 의미와 구조를 전달하기 위해 만들어진 언어 |
-| program은 순서라는 의미이다.<br />이런 순서를 만드는 행위를 programming이라고 한다.<br />자바 스크립트는 상호작용을 위해 고안된 언어이다. <br />순서에 따라 웹브라우저의 여러 기능이 실행되어야 한다. | 웹페이지를 묘사하는 것이기 때문에 <br />시간의 순서에 따라 실행되도록 기능을 가질 이유가 없다.<br />이게 html이 프로그래밍 언어가 아닌 주된 이유이다. |
+| Javascript                                               | html                                                         |
+| -------------------------------------------------------- | ------------------------------------------------------------ |
+| 컴퓨터 언어<br />프로그래밍 언어                         | 컴퓨터 언어                                                  |
+| 동적이다.                                                | 정적이다.                                                    |
+| 웹사이트 내에서 사용자와의 상호작용을 위해 만들어진 언어 | 웹브라우저를 통해 웹콘텐츠와 구조를 전달하기 위해 만들어진 언어 |
+
+- program은 순서라는 의미로 이런 순서를 만드는 행위를 programming이라고 한다.
+  - `javascript`: 상호작용을 위해 고안된 언어이기 때문에 순서에 따라 웹브라우저의 여러 기능이 실행되어야 한다.
+  - `html`: 웹페이지를 묘사하는 것이기 때문에 시간의 순서에 따라 실행되도록 기능을 가질 이유가 없다.이게 html이 프로그래밍 언어가 아닌 주된 이유이다.
 
 <br>
 
@@ -112,9 +115,9 @@ alert('지난 강의에서 Javascript를 실행하는 한 가지 방법인 이�
 >
 > 그렇다면 Javascript에서는 어떤 데이터 종류가 있는지 알아보자.
 
-https://developer.mozilla.org/ko/docs/Web/JavaScript/Data_structures
+✏ 참고자료1: https://developer.mozilla.org/ko/docs/Web/JavaScript/Data_structures
 
-https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String
+✏ 참고자료2: https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String
 
 <br>
 
@@ -123,8 +126,6 @@ https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/St
 > 자바스크립트를 이용하면 웹 브라우저를 제어할 수 있다.
 >
 > **자바스크립트는 html뿐만 아니라 웹페이지의 시각적인 요소들 담당하는 css도 제어할 수 있다.** 
-
-<br>
 
 - 자바스크립트 실행파트에서 **event를 활용**하여 자바스크립트를 실행하는 것을 확인 할 수 있었다.
 
@@ -157,7 +158,9 @@ https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/St
 
 이렇게 코딩이 되었다면, 버튼을 클릭할 때마다 `<body>`태그의 `style`속성의 `backgorund-color `가 제어가 되어 원하는 색상으로 변할 것이다.
 
-참고자료: https://developer.mozilla.org/ko/docs/Web/API/Document/querySelector
+<br>
+
+✏ 참고자료: https://developer.mozilla.org/ko/docs/Web/API/Document/querySelector
 
 <br>
 
