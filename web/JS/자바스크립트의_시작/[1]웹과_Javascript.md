@@ -14,14 +14,12 @@
 - 웹브라우저는 한번 화면에 출력되면 자기 자신을 바꿀 수 없다.
 - 그러나 자바스크립트를 이용하면 태그나 속성에 변화를 줄 수 있다.
 
-<br>
-
 | Javascript                                                   | html                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | 컴퓨터 언어<br />프로그래밍 언어                             | 컴퓨터 언어                                                  |
 | 동적이다.                                                    | 정적이다.                                                    |
 | 웹사이트 내에서 사용자와의 상호작용을 위해 만들어진 언어     | 웹브라우저를 통해 웹콘텐츠의 의미와 구조를 전달하기 위해 만들어진 언어 |
-| program은 순서라는 의미이다.<br />이런 순서를 만드는 행위를 programming이라고 한다.<br />자바 스크립트는 상호작용을 위해 고안된 컴퓨터 언어이기 때문에<br />시간의 순서에 따라 웹브라우저의 여러 기능이 실행되어야 한다. | 웹페이지를 묘사하는 것이기 때문에 <br />시간의 순서에 따라 실행되도록 기능을 가질 이유가 없다.<br />이게 html이 프로그래밍 언어가 아닌 주된 이유이다. |
+| program은 순서라는 의미이다.<br />이런 순서를 만드는 행위를 programming이라고 한다.<br />자바 스크립트는 상호작용을 위해 고안된 언어이다. <br />순서에 따라 웹브라우저의 여러 기능이 실행되어야 한다. | 웹페이지를 묘사하는 것이기 때문에 <br />시간의 순서에 따라 실행되도록 기능을 가질 이유가 없다.<br />이게 html이 프로그래밍 언어가 아닌 주된 이유이다. |
 
 <br>
 
@@ -33,7 +31,7 @@
 
 <br>
 
-### scrip tag
+### 2-1. scrip tag
 
 > html에 자바스크립트를 추가할 수 있는 태그
 
@@ -55,15 +53,11 @@
 
 <img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/12b8d6c2-7ac9-4867-95dc-b086ae39bb2d/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220206%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220206T050238Z&X-Amz-Expires=86400&X-Amz-Signature=ac433ad7cc07b0ce61a49f3f61188b2868f1d01996ef5f982845753d0157b74f&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject" style="zoom:120%" >
 
-<br>
-
-### event
+### 2-2. event
 
 > 웹브라우저에서 일어나는 사건들 중에 기념할만한 몇가지들을 이벤트로 정의하고 
 >
 > 이를 활용하여 자바스크립트를 html에 적용시킨다. 
-
-<br>
 
 ```html
 <body>
@@ -93,13 +87,11 @@
 
 <br>
 
-### console 
+### 2-3. console 
 
 > 파일을 만들지 않고도 자바스크립트 코드를 즉석에서 실행할 수 있다.
 
 **크롬 브라우저의 경우, 개발자 도구를 활용하여 언제든지 내가 현재 방문한 웹페이지를 대상으로 자바스크립트를 실행 할 수 있다.**
-
-<br>
 
 - 코딩은 문제 해결을 위해 사용하는 것이다.
 - 콘솔을 이용하면 웹사이트에서 간단한 문제를 간편하게 javascript를 실행시켜서 해결할 수 있다.  
@@ -124,8 +116,6 @@ https://developer.mozilla.org/ko/docs/Web/JavaScript/Data_structures
 
 https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String
 
-
-
 <br>
 
 ## 4. 자바스크립트와 CSS
@@ -139,8 +129,6 @@ https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/St
 - 자바스크립트 실행파트에서 **event를 활용**하여 자바스크립트를 실행하는 것을 확인 할 수 있었다.
 
 - 이벤트의 결과로 특정 태그의 스타일(css)에 동적인 변화를 줄 수도 있다. 
-
-<br>
 
 ```html
 <body>
@@ -169,8 +157,7 @@ https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/St
 
 이렇게 코딩이 되었다면, 버튼을 클릭할 때마다 `<body>`태그의 `style`속성의 `backgorund-color `가 제어가 되어 원하는 색상으로 변할 것이다.
 
- <br>
-
 참고자료: https://developer.mozilla.org/ko/docs/Web/API/Document/querySelector
 
 <br>
+
