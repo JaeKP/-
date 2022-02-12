@@ -52,9 +52,7 @@
 </body>
 ```
 
-`실제 적용된 모습`
 
-<img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/12b8d6c2-7ac9-4867-95dc-b086ae39bb2d/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220206%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220206T050238Z&X-Amz-Expires=86400&X-Amz-Signature=ac433ad7cc07b0ce61a49f3f61188b2868f1d01996ef5f982845753d0157b74f&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject" style="zoom:120%" >
 
 ### 2-2. event
 

@@ -47,10 +47,6 @@
 
 <br>
 
-<img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/adadf567-ed7c-4f72-ab33-ef4a9c8c2806/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220206%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220206T091126Z&X-Amz-Expires=86400&X-Amz-Signature=931cfb2c1bea8bb4b1f2fc1684e12bc8a3c273243b92c635073ae1bc837c9f1a&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject" style="zoom:90%">
-
-<br>
-
 ## 2. 조건문
 
 > **조건문**이란 **프로그램이 조건에 따라서 다른 기능들이 다른 순서에 따라서 실행되도록 만들어주는 것**이다.
@@ -193,8 +189,6 @@
 </body>
 ```
 
-<img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/e7f79d92-5790-4a86-907f-2423df03ee3d/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220206%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220206T105545Z&X-Amz-Expires=86400&X-Amz-Signature=1d5789321291a9b69ad66592a7ae4492b7a6101ae2d6532951d2b38bf6dd35de&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject" style="zoom:90%">
-
 ✏ 메서드와 속성 참고자료 : https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array
 
 <br>
@@ -273,8 +267,6 @@
   </ul>
 </body>
 ```
-
-<img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/96195e1d-84a3-4e55-b28f-59fbbe010baf/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220206%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220206T113501Z&X-Amz-Expires=86400&X-Amz-Signature=460b7691b724a1137603b35a63e553b752c9838ae3794407f3d09e68a503e748&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject" style="zoom:120%">
 
 <br>
 
