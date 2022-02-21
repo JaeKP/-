@@ -34,11 +34,28 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 
 <br>
 
+```python
+def print_hello(i):
+    if i == 3:
+        return
+    else:
+        print('Hello', i)  # 반복할 작업
+        print_hello(i + 1)
+        print('Bye', i)    # 반복할 작업 (되돌아오면서 반복된다.)
+
+print_hello(0)             # Hello 0 Hello 1 Hello 2 Bye 2 Bye 1 Bye 0
+```
+
+<br>
+
 ## 활용
 
 - 특정조건에 다다를 때 까지 스스로를 반복하기 때문에 이를 통해 직관적으로 알고리즘을 설계할 수 있다.
 - 반드시 종료되는 상황을 작성해야 한다. (원하는만큼 반복을 하기 위함)
 - 매개변수로 넘어온 값(전달인자)을 활용해 종료 조건으로  기입한다.
+  - 반복의 횟수
+  - 문제를 재귀적으로 해결하는 경우에는 문제의 크기를 표현
+  - 그래프에서 깊이우선탐색에서는 방문하는 정점의 번호
 
 <br>
 
@@ -105,7 +122,7 @@ def factorial(num):
     return result
 ```
 
-
+<br>
 
 - 재귀 함수 사용
 
@@ -113,17 +130,82 @@ def factorial(num):
 def factorial(num):
     if num == 1:                           # 종료조건을 설정
         return 1                           # num이 1이되면 1을 반환하고 재귀 호출 종료
-    return num * factorial(num -1 )        # num 이 1 이상이면 n과 함수에 n-1을 넣어 반한된 값을 곱함 
+    return num * factorial(num -1 )        # num 이 1 이상이면 n과 함수에 n-1을 넣어 반한된 값을 곱함
+
+# ================================
+# 다음과 같은 형태로 구현되는 것이다. 
+#factorial(4)
+#	= 4* factorial(3)
+#		= 3* factorial(2)
+#			= 2 * factorial(1)  종료조건!
 ```
 
- <br>
+
 
 :pencil2:**문제풀이 팁**
 
 - 매개변수를 함수가 풀어야 하는 문제의 크기로 보면 이해가 쉽다.
+
 - 재귀함수를 호출하면서 이런 문제의 크기가 점점 줄어들게 된다.
+
 - 점점 줄어들게 되어 종료조건으로 수렴하게 되어 함수가 종료된다.  
 
-<br>
+- 기본적으로` rescursion(i(현재), N(목표_종료조건))`의 형태로 사용된다.  
+
+  - 매개변수: `i(현재)`, `N(목표_종료조건)`
+
+  ```python
+  # 예시 (재귀로 리스트를 복사한다면...?)
+  def recursion(i, N):
+      if i == N:
+          print(B)
+      else:
+          B[i] = A[i]
+          recursion(i + 1, N)
+  
+  A = [10, 20, 30]
+  B = [0]*3
+  
+  recursion(0, 3)   # [10, 20, 30]  
+  ```
+  
+
+​	<img src= "https://user-images.githubusercontent.com/72687619/154957420-8f21ede1-ffc1-48fc-885e-f0dd3c05c445.png" style="zoom: 70%;" >
+
+
 
 <br>
+
+## Meomoization (메모이제이션)
+
+> 이전에 계산한 값을 메모리에 저장하여 중복으로 계산하는 것을 막음으로써 효율을 높인다
+
+- 동적계획법에서 활용되는 개념
+  - 동적 계획 알고리즘: 입력 크기가 작은 부분 문제들을 모두 해결한 후에 그 해들을 이용하여 보다 큰 크기의 부분 문제들을 해결하여, 최종적으로 원래 주어진 입력의 문제를 해결하는 알고리즘.
+- 반복되지만 결과 값은 변하지 않는 작은 문제들의 결과 값을 저장. => 반복 계산 할 경우, 기록되어 있는 값을 활용하여 불필요한 계산을 하지 않는다. 
+
+<br>
+
+```python
+# 예시 (피보나치 수열)
+def fibo(n):
+    if n < 2:
+        return n
+    else:
+        return fibo(n-1) + fibo(n-2)
+
+# 메모이제이션 활용
+
+def fibo_memo(n):
+    global memo
+    if n >= 2 and len(memo) <= n:
+        memo.append(fibo_memo(n-1) + fibo_memo(n-2))
+    return memo[n]
+    
+memo = [0, 1]
+```
+
+<br>
+
+
+
