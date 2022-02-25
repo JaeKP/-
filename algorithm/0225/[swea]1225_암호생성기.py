@@ -1,5 +1,4 @@
-import sys
-sys.stdin = open('input.txt')
+# 문제 url: https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14uWl6AF0CFAYD
 
 for _ in range(10):
     t = int(input())
