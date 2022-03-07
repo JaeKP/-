@@ -175,7 +175,7 @@ console.log(title);  // <h1>Grab me!</h1>
  }
  
  // addEventListener()는 말 그대로 event를 listen을 하는 것이다
- // 하지만 무슨 eveent를 listen하고 싶은지 알려주어야 한다
+ // 하지만 무슨 event를 listen하고 싶은지 알려주어야 한다
  // 첫번째 인자: listen하고 싶은 이벤트
  // 두번째 인자: 이벤트가 발생하면 실행되는 함수!
  title.addEventListener("click", handleTitleClick);
@@ -222,7 +222,7 @@ title.addEventListener("mouseleave", handleMouseLeave);
 
 <br>
 
-- **event를 listne하는 다른 방법**
+- **Event를 Listen하는 다른 방법**
 
 ```javascript
 const title = document.querySelector("div.hello:first-child h1");
@@ -334,7 +334,6 @@ function handleTitleClick(){
     title.style.color = "blue";
   }
 }
-
 
 title.addEventListener("click", handleTitleClick);
 ```
