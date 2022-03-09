@@ -35,7 +35,7 @@ const loginInput = document.querySelector("#login-form input");
 const loginButton = document.querySelector("#login-form button");
 
 
-유저가 입력하는 값의 유효성을 확인하기 => 하지만 이는 html 속성만으로도 충분히 가능하다!
+// 유저가 입력하는 값의 유효성을 확인하기 => 하지만 이는 html 속성만으로도 충분히 가능하다!
 function btnClick(){
   const username = loginInput.value;
   if (username === ""){
@@ -292,6 +292,153 @@ if(savedUsername === null) {
   loginForm.addEventListener("submit", onLoginSubmit);
 }else { 
   paintGreeting(savedUsername);
+```
+
+<br>
+
+```javascript
+const loginForm = document.querySelector("#login-form");
+const loginInput = document.querySelector("#login-form input");
+const greeting = document.querySelector("#greeting");
+
+const HIDDEN_CLASSNAME = "hidden"
+const USERNAME_KEY = "username"
+
+function onLoginSubmit(event){
+  event.preventDefault();
+  const username = loginInput.value;
+  localStorage.setItem(USERNAME_KEY, username);
+  loginForm.classList.add(HIDDEN_CLASSNAME);
+  paintGreeting();
+}
+
+function paintGreeting(){
+  const username = localStorage.getItem(USERNAME_KEY);
+  greeting.innerText = `Hello ${username}`;
+  greeting.classList.remove(HIDDEN_CLASSNAME);
+}
+
+const savedUsername = localStorage.getItem(USERNAME_KEY);
+
+if(savedUsername === null) {
+  loginForm.classList.remove(HIDDEN_CLASSNAME);
+  loginForm.addEventListener("submit", onLoginSubmit);
+}else { 
+  paintGreeting(s);
+}
+```
+
+- 이렇게 할 수도 있지만, `localStorage`를 두 번이나 확인한다는 단점이 있다. 
+- 그래서 니코쌤은 전자를 사용!
+
+<br>
+
+## 2. CLOCK
+
+### 1) Intervals
+
+> '매번'일어나야 하는 무언가를 뜻한다.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+...
+  <h2 id="clock">00:00</h2>
+...
+</html>
+```
+
+```javascript
+const clock = document.querySelector("h2#clock");
+
+function sayHello(){
+  console.log("hello");
+}
+
+// setInterval(): 첫번째 인자로 실행하고자 하는 함수, 두번째 인자로 호출되는 함수가 실행되는 간격(ms)를 받는다. 
+setInterval(sayHello, 5000)
+```
+
+- `setInterval()`: 첫번째 인자로 실행하고자 하는 함수, 두번째 인자로 호출되는 함수가 실행되는 간격(ms)를 받는다.
+- 5초마다 콘솔에 hello가 찍히는 것을 확인할 수 있다. 
+
+<br>
+
+### 2) Timeout
+
+> 일정시간이 지난 후에 실행 
+
+```javascript
+const clock = document.querySelector("h2#clock");
+
+function sayHello(){
+  console.log("hello");
+}
+
+// setTimeout(): 첫번째 인자로 실행하고자 하는 함수, 두번째 인자로 실행 전에 대기하는 시간(ms)을 받는다. 
+setTimeout(sayhello, 5000)
+```
+
+- ` setTimeout()`: 첫번째 인자로 실행하고자 하는 함수, 두번째 인자로 실행 전에 대기하는 시간(ms)을 받는다. 
+
+<br>
+
+### 3) DateObject
+
+:pencil2:참고자료: https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Date
+
+```javascript
+const clock = document.querySelector("h2#clock");
+
+// 함수가 호출되면 새로운 Date object를 만든다. 
+// new Date object는 현재 날짜, 시간, 분, 초에 대한 정보를 가지고 있다. 
+// setInterval(getClock,1000)에 의해 object를 매 초마다 새로 create!
+function getClock() {
+  const date = new Date();
+  clock.innerText = (`${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`);
+}
+
+// 웹사이트가 로드되자마자 시작하기위해 함수를 직접 호출
+getClock()
+
+// 1초마다 함수를 호출한다. 
+setInterval(getClock,1000);
+```
+
+- new 를 선두에 쓰고 생성자 함수를 호출하면 instance object를 반환!
+  - 즉, 변수 date는 Date객체의 인스턴스(객체)!
+
+<br>
+
+### 4) PadStart()
+
+> 시계를 좀 더 보기 좋게 하기위해 수정! 
+
+```javascript
+// string에 사용하는 함수이다.
+// PadStart(): 첫번쨰 인자로 최소 글자 수, 두번째 인자로 글자 수가 미달할 경우 앞에 추가할 문자를 받는다.   
+PadStart(2, "0")
+
+// 글자 수가 미달할 경우, 뒤에 문자를 추가
+PadEnd(2, "0")
+```
+
+```javascript
+const clock = document.querySelector("h2#clock");
+
+function getClock() {
+  const date = new Date();
+
+  //padStart()를 사용하기 위해 문자로 전환
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const seconds = String(date.getSeconds()).padStart(2, "0");
+  clock.innerText = (`${hours}:${minutes}:${seconds}`);
+}
+
+getClock()
+setInterval(getClock,1000);
+
 ```
 
 <br>
