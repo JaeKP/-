@@ -279,19 +279,12 @@ toDoForm.addEventListener("submit", handleToDoSubmit);
 > array는 인덱스를 통해 접근할 수 있기 때문에 string을 array로 바꾼다. 
 
 ```javascript
-const toDoForm = document.getElementById("todo-form");
-const toDoList = document.getElementById("todo-list");
-const toDoInput = toDoForm.querySelector("input");
-
+...
 // 오타를 방지하기 위해 문자를 중복으로 사용하면 변수로 설정한다. 
 const TODOS_KEY = 'todos';
-
 const toDos = [];
 
-//생략 
-
-toDoForm.addEventListener("submit", handleToDoSubmit);
-
+... 
 
 function sayHello(item){
   console.log("This is", item);
@@ -449,6 +442,155 @@ if(savedToDos != null){
   parsedToDos.forEach(paintToDo);
 }
 
+```
+
+<br>
+
+### 5) Deletign To Dos
+
+> toDO를 삭제할 때 마다 localStorage를 업데이트 해야 한다. 
+
+#### (1) localStorage의 value를 객체의 array로 만든다. 
+
+>  어떤 toDo를 데이터베이스에서 지워야 하는지 모르기 때문에 id속성을 부여한다. 
+
+`예시` [chicken, pizza] ========> [{id:1212, text:chicken}, {id:2323, text:pizza}]  
+
+```javascript
+...
+
+// 이제 text가 아닌 object를 인자로 받기 때문에 수정해야 한다. 
+function paintToDo(newTodo){
+  const li = document.createElement("li");
+  
+  // id 추가 (유저가 어떤 아이디를 지우기를 원하는지 알려주어야 한다.)
+  li.id = newTodo.id;
+
+  const span = document.createElement("span");
+  const button = document.createElement("button");
+  
+  // 수정
+  span.innerText = newTodo.text;
+
+  button.innerText = "❌";
+  button.addEventListener("click", deleteToDo);
+  li.appendChild(span);
+  li.appendChild(button);
+  toDoList.appendChild(li);
+}
+
+function handleToDoSubmit(event){
+  event.preventDefault();
+  const newTodo = toDoInput.value; 
+  
+  // 이제 object를 push할 것이다. 
+  const newTodoObj = {
+    text: newTodo,
+    id: Date.now(),
+  };
+
+  toDoInput.value = "";
+  
+  // toDos.push(newTodoO);
+  // paintToDo(newTodo);
+  // 위의 코드를 다음과 같이 수정
+  toDos.push(newTodoObj);
+  paintToDo(newTodoObj);
+  saveToDos()
+}
+...
+```
+
+<br>
+
+#### (2) Delete!
+
+> filter()를 활용하여 삭제할 원소를 제외하고 새로운 배열을 만든다. 
+
+```javascript
+const toDoForm = document.getElementById("todo-form");
+const toDoList = document.getElementById("todo-list");
+const toDoInput = toDoForm.querySelector("input");
+const TODOS_KEY = 'todos';
+let toDos = [];
+
+function saveToDos(){
+  localStorage.setItem(TODOS_KEY, JSON.stringify(toDos))
+}
+
+
+function deleteToDo(event){
+  const li = event.target.parentElement;
+  li.remove();
+  
+  // 삭제를 클릭한 li의 id를 갖고 있는 toDo를 지운다. 
+  // 클릭한 li.id와 다른 toDo는 배열에 남겨둔다. 
+  // toDo.id는 number, li.id는 string이기때문에 변환을 해야 한다. 
+  // DOM의 id는 문자열이다. 
+  toDos = toDos.filter((toDo) => toDo.id !== parseInt(li.id));
+
+  //toDos DB에서 todo를 지운 뒤에 saveToDos 호출
+  saveToDos()
+  
+}
+
+function paintToDo(newTodo){
+  const li = document.createElement("li");
+  li.id = newTodo.id;
+  const span = document.createElement("span");
+  const button = document.createElement("button");
+  
+  span.innerText = newTodo.text;
+  button.innerText = "❌";
+  button.addEventListener("click", deleteToDo);
+  li.appendChild(span);
+  li.appendChild(button);
+  toDoList.appendChild(li);
+}
+
+
+function handleToDoSubmit(event){
+  event.preventDefault();
+  
+  const newTodo = toDoInput.value; 
+  const newTodoObj = {
+    text: newTodo,
+    id: Date.now(),
+  };
+
+  toDoInput.value = "";
+  toDos.push(newTodoObj);
+  paintToDo(newTodoObj);
+  saveToDos()
+}
+
+toDoForm.addEventListener("submit", handleToDoSubmit);
+
+const savedToDos = localStorage.getItem(TODOS_KEY);
+
+if(savedToDos != null){
+  const parsedToDos = JSON.parse(savedToDos);
+  toDos = parsedToDos;
+  parsedToDos.forEach(paintToDo);
+}
+```
+
+**:speech_balloon:`array.filter(function)`**
+
+주어진 함수의 테스트를 통과하는(True 값을 반환하는) 모든 요소를 모아 새로운 배열로 반환한다. 
+
+즉, array의 item을 유지하고 싶으면 True를 리턴해야 한다. 
+
+```javascript
+const arr = ["pizza", "banana", "tomato"]
+function sexyFilter(food){return food !== "banana"}
+arr.filter(sexyFilter) // ['pizza', 'tomato']
+```
+
+```javascript
+const arr = [1234, 5656, 454, 343, 12, 4646, 405] 
+function sexyFilter(num){return num <= 1000}
+arr.filter(sexyFilter) // [454, 343, 12, 405]
 ```
 
 <br>
