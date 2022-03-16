@@ -282,7 +282,7 @@ window.addEventListener("resize", handleWindowResize);
 **기본적으로 document의 body아래를 가져올 수 없다.** 
 
 1. document의 `body`, `head`, `title`, 이런 것들은 중요하기 때문에 존재하는 것이다. 
-2. **나머지 element는 `qeuryselector`sk `getElementById`등으로 찾아와야 한다.** 
+2. **나머지 element는 `qeuryselector`, `getElementById`등으로 찾아와야 한다.** 
 
 <br>
 
@@ -305,7 +305,7 @@ function handleWindowResize(){
   document.body.style.backgroundColor = 'tomato';
 }
 
-function handleWindowCopy(){
+function handleWindowCopy(){     
   alert("복사!");
 }
 

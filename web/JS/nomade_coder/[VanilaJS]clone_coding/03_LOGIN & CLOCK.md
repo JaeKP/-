@@ -333,6 +333,21 @@ if(savedUsername === null) {
 
 <br>
 
+**`정리`**
+
+> 1. 유저가 데이터를 제출하면, 입력폼을 보이지 않도록 설정한다. (제출 시, 자동으로 새로고침 되지 않도록 한다.)
+> 2. 데이터를 localStorage에 저장한다.
+> 3. 새로고침을 할 경우, localStorage에 유저가 입력해야 하는 데이터가 존재하는 지에 대한 유무를 따진다. 
+> 4. 데이터가 없으면 입력폼을 보여준다. 
+
+| 코드                               | 설명                                                         |
+| ---------------------------------- | ------------------------------------------------------------ |
+| `event.preventdefault()`           | 이벤트를 실행했을 때 자동적으로 발생하는 브라우저의 기본 동작이 발생되지 않도록 막는다. |
+| `localStorage.setItem(key, value)` | localStorage에 key을 가진 value를 저장한다.                  |
+| `localStorage.getItem(key)`        | localStorage에서 key을 가진 value 데이터를 불러온다.         |
+
+<br>
+
 ## 2. CLOCK
 
 ### 1) Intervals
