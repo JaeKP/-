@@ -12,3 +12,4 @@
 | 2022/03/15 | `SWEA` 5099 피자 굽기<br />`SWEA` 5102 노드의 거리<br />`SWEA` 5105 미로의 거리<br />`SWEA` 11623 숫자카드 | **Queue, BFS**       |
 | 2022/03/16 | `SWEA` 1231 중위순회                                         | **이진 TREE , 재귀** |
 | 2022/03/17 | `SWEA` 1232 사칙연산<br />`SWEA` 5174 subtree<br />`SWEA` 5176 이진탐색<br />`SWEA` 5177 이진힙<br />`SWEA` 5178 노드의 합 | **TREE, heap**       |
+| 2022/03/18 | `SWEA` 1238 Contact                                          | **BFS**              |
