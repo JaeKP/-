@@ -13,7 +13,8 @@
 | 2022/03/16 | `SWEA` 1231 중위순회                                         | **이진 TREE , 재귀**               |
 | 2022/03/17 | `SWEA` 1232 사칙연산<br />`SWEA` 5174 subtree<br />`SWEA` 5176 이진탐색<br />`SWEA` 5177 이진힙<br />`SWEA` 5178 노드의 합 | **TREE, heap**                     |
 | 2022/03/18 | `SWEA` 1238 Contact                                          | **BFS**                            |
-| 2022/03/19 | `BOJ` 2667 단지번호 붙이기<br />`SWEA` 7465 창용마을 무리의 개수<br />`SWEA` 1861 정사각형 방<br />`SWEA` 2817 부분 수열의 합 (solve problem again) | **BFS<br />백트래킹 (부분 집합)**  |
+| 2022/03/19 | `BOJ` 2667 단지번호 붙이기<br />`SWEA` 7465 창용마을 무리의 개수<br />`SWEA` 1861 정사각형 방<br />`SWEA` 2817 부분 수열의 합 (solve problem again) | **BFS<br />부분 집합**             |
 | 2022/03/20 | `SWEA` 1953 탈주범 검거                                      | **BFS<br />**`solve problem again` |
+| 2022/03/21 | `SWEA` 1486 장훈이의 높은 선반                               | **부분 집합<br />**                |
 
 <br>
