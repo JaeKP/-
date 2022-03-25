@@ -48,7 +48,7 @@
 
  <br>
 
-```html
+```javascript
   <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script>
@@ -78,7 +78,7 @@
 >
 > HTML 이랑 문법 구조가 비슷하다. 
 
-```html
+```javascript
   <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   
@@ -106,15 +106,16 @@
   </script>
 ```
 
+`babel`
+
+- 자바스크립트 변환기 이다. (컴파일러)
+- head의 script 태그 내에 어떻게 변환되었는지 확인 할 수 있다. 
+
 <br>
 
 #### (1) 컴포넌트를 다른 컴포넌트 안에 넣기
 
-```html
-  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script type="text/babel">
+```javascript
     const root = document.getElementById("root");
     const Title = () => (
       <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
@@ -131,9 +132,9 @@
       </button>
     );
 
-    // 여러 컴포넌트들이 합쳐진 구성을 생성한다.
-    // 컴포넌트의 첫 글자는 반드시 대문자여야 한다.
-    // 만약 소문자면 HTML태그로 인식한다.
+    <!-- 여러 컴포넌트들이 합쳐진 구성을 생성한다.
+      컴포넌트의 첫 글자는 반드시 대문자여야 한다.
+      만약 소문자면 HTML태그로 인식한다. -->
     const Container = (
       <div>
         <Title />
@@ -141,6 +142,252 @@
       </div>
     );
     ReactDOM.render(Container, root);
+```
+
+**`함수형 컴포넌트`**
+
+- ```javascript
+  <!-- arrow 함수 ver -->
+      const Button = () => (
+        <button
+          style={{ backgroundColor: "tomato" }}
+          onClick={() => console.log("im clicked")}
+        >
+          Click me
+        </button>
+      );
+  
+  ```
+
+- ```javascript
+  <!-- 일반 함수 ver--> 
+      function Button() {
+        return (
+          <button
+            style={{ backgroundColor: "tomato" }}
+            onClick={() => console.log("im clicked")}
+          >
+            Click me
+          </button>
+        );
+      }
+  ```
+
+<br>
+
+## 2. STATE
+
+> 컴포넌트에서 동적인 값을 state(상태)라고 부른다. 
+>
+> 동적인 데이터를 다룰 때 사용한다. 
+
+<br>
+
+```javascript
+  <script type="text/babel">
+    const root = document.getElementById("root");
+    const Container = () => (
+      <div>
+        <h3>Total clicks: 0 </h3>
+        <button>Click me</button>
+      </div>
+    );
+
+    // 컴포넌트 ! <Container />
+    ReactDOM.render(<Container />, root);
+  </script>
+```
+
+<br>
+
+### (1) 컴포넌트에 변수를 추가하고 ui에 반영
+
+```javascript
+  <script type="text/babel">
+    const root = document.getElementById("root");
+    let counter = 0;
+    function countUp() {
+      counter = counter + 1;
+      ReactDOM.render(<Container />, root);
+    }
+
+    // 중괄호를 활용해 변수를 jsx에 전달한다.
+    // 이벤트 = {이벤트가 발생하면 실행되는 함수}
+    // 이벤트가 실행되어서 변경된 것을 ui에 반영되려면 컨포넌트가 다시 랜더링 되어야 한다.
+    const Container = () => (
+      <div>
+        <h3>Total clicks: {counter} </h3>
+        <button onClick={countUp}>Click me</button>
+      </div>
+    );
+
+    ReactDOM.render(<Container />, root);
+  </script>
+```
+
+```javascript
+  <script type="text/babel">
+    const root = document.getElementById("root");
+    let counter = 0;
+    function countUp() {
+      counter = counter + 1;
+      render();
+    }
+
+    function render() {
+      ReactDOM.render(<Container />, root);
+    }
+
+    const Container = () => (
+      <div>
+        <h3>Total clicks: {counter} </h3>
+        <button onClick={countUp}>Click me</button>
+      </div>
+    );
+
+    render();
+  </script>
+```
+
+<br>
+
+### 2) 리렌더링을 하는 다른 방법
+
+```javascript
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById("root");
+
+    // const data = React.useState();
+    // console.log(data) => [undefined, f]
+    // undifined는 데이터이다.  f는 이 데이터를 바꿀 때 사용하는 함수이다.
+    function App() {
+      const data = React.useState();
+      console.log(data);
+      return (
+        <div>
+          <h3>Total clicks: 0 </h3>
+          <button>Click me</button>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, root);
+  </script>
+```
+
+`함수형 컴포넌트`
+
+- ```javascript
+      function App() {
+        const data = React.useState();
+        console.log(data);
+        return (
+          <div>
+            <h3>Total clicks: 0 </h3>
+            <button>Click me</button>
+          </div>
+        )
+      };
+
+- ```javascript
+     const App = () => {
+        const data = React.useState();
+        console.log(data);
+        return (
+          <div>
+            <h3>Total clicks: 0 </h3>
+            <button>Click me</button>
+          </div>
+        );
+  ```
+
+<br>
+
+#### (1) 데이터를 전달 
+
+```javascript
+  <script type="text/babel">
+    const root = document.getElementById("root");
+
+    // const data = React.useState();
+    // console.log(data) => [undefined, f]
+    // undifined는 데이터이다.  f는 이 데이터를 바꿀 때 사용하는 함수이다.
+
+    function App() {
+      // const data = React.useState(0); 데이터 초기 값을 0으로 설정
+      // const counter = data[0];
+      // const modifier = data[1];
+      const [counter, modifier] = React.useState(0);
+      return (
+        <div>
+          <h3>Total clicks: {counter} </h3>
+          <button>Click me</button>
+        </div>
+      );
+    }
+    ReactDOM.render(<App />, root);
+  </script>
+```
+
+<br>
+
+#### (2) 데이터 수정 & 리렌더링
+
+**`React.useState`를 통해 counter와 같은 데이터를 숫자형 데이터로 건네주고, 그 데이터 값을 바꿀 함수도 전해준다.**
+
+**이 함수를 이용해서 데이터를 바꿨을 때, 데이터 값이 바뀌고 컴포넌트도 동시에 리렌더링 된다. (자동!)**
+
+```javascript
+  <script type="text/babel">
+    const root = document.getElementById("root");
+    function App() {
+      const [counter, setCounter] = React.useState(0);
+      const onClick = () => {
+        setCounter(counter + 1);
+      };
+      return (
+        <div>
+          <h3>Total clicks: {counter} </h3>
+          <button onClick={onClick}>Click me</button>
+        </div>
+      );
+    }
+    ReactDOM.render(<App />, root);
+  </script>
+```
+
+<br>
+
+### 3) State Function
+
+state를 세팅하는 데는 2가지 방법이 있다.
+
+1) 직접 할당 :`setState(state +1)`
+   - 현재 state랑 관련이 없는 값을 새로운 state로 하고싶은 경우
+2) 함수를 할당:`setState(state => state +1) `(함수의 첫번째 인자는 현재 state 이다)
+   - 현재 state에 조금의 변화를 주어서 새로운 state를 주고 싶은 경우
+
+```javascript
+  <script type="text/babel">
+    const root = document.getElementById("root");
+    function App() {
+      const [counter, setCounter] = React.useState(0);
+      const onClick = () => {
+        // setCounter(counter + 1);
+        // 현재 state를 기반으로 계산 할 떈 아래와 같이 구현한다.
+        setCounter((current) => courrent + 1);
+      };
+      return (
+        <div>
+          <h3>Total clicks: {counter} </h3>
+          <button onClick={onClick}>Click me</button>
+        </div>
+      );
+    }
+    ReactDOM.render(<App />, root);
   </script>
 ```
 
