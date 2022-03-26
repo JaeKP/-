@@ -11,6 +11,11 @@
 <br>
 
 ```python
+def 함수이름(매개변수):
+    return 반환 값
+```
+
+```python
 lambda 매개변수 : 반환 값 
 ```
 
@@ -89,6 +94,15 @@ print(sorted(chicken_brand))                                    # ['bbq', 'bhc',
 #람다 함수를 활용하면 value-가격-를 기준으로 key를 정렬할 수 있다.
 print(sorted(chicken_brand, key = lambda x : chicken_brand[x])) # ['kfc', 'bhc', 'kyochon', 'bbq']
 
+```
+
+<br>
+
+```python
+chicken_brand = [('bhc', 20000), ('bbq', 18000), ('kyochon', 20000), ('kfc', 15000)]
+chicken_brand.sort(key= lambda x: (x[1],x[0]))  # 가격 순으로 정렬한 후 이름 순으로 정렬한다. 
+
+print(chicken_brand) # [('kfc', 15000), ('bbq', 18000), ('bhc', 20000), ('kyochon', 20000)]
 ```
 
 <br>
