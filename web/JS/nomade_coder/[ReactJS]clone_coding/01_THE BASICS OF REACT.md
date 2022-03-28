@@ -132,9 +132,9 @@
       </button>
     );
 
-    <!-- 여러 컴포넌트들이 합쳐진 구성을 생성한다.
-      컴포넌트의 첫 글자는 반드시 대문자여야 한다.
-      만약 소문자면 HTML태그로 인식한다. -->
+    <!-- 여러 컴포넌트들이 합쳐진 구성을 생성한다. -->
+    <!-- 컴포넌트의 첫 글자는 반드시 대문자여야 한다. -->
+    <!-- 만약 소문자면 HTML태그로 인식한다. -->
     const Container = (
       <div>
         <Title />
@@ -308,6 +308,8 @@
 
 #### (1) 데이터를 전달 
 
+**`const [<상태 값 저장 변수>, <상태 값 갱신 함수>] = useState(<상태 초기 값>);`**
+
 ```javascript
   <script type="text/babel">
     const root = document.getElementById("root");
@@ -359,6 +361,8 @@
   </script>
 ```
 
+- onClick 이벤트가 발생할 때마다 함수를 
+
 <br>
 
 ### 3) State Function
@@ -392,3 +396,54 @@ state를 세팅하는 데는 2가지 방법이 있다.
 ```
 
 <br>
+
+### 4) Inputs and State
+
+```javascript
+  function App() {
+      return (
+        // jsx는 HTML과 비슷하지만 다른 점은 있다. 
+        // 특히, for와 class와 같이 이미 JS에서 사용되고 있는 키워드를 HTML사용 목적으로 사용해서는 안된다. 
+        // class => className  for => htmlFor
+        <div>
+          <h1>Super Converter</h1>
+          <label htmlFor="minutes">Minutes</label>
+          <input id="minutes" placeholder="Minutes" type="number" />
+          <label htmlFor="hours">Hours</label>
+          <input id="hours" placeholder="Hours" type="number" />
+        </div>
+      );
+    }
+```
+
+<br>
+
+```javascript
+  <script type="text/babel">
+    const root = document.getElementById("root");
+    function App() {
+      const [minutes, setMinutes] = React.useState();
+      const onChange = (event) => {
+        setMinutes(event.target.value);
+      };
+      return (
+        <div>
+          <h1>Super Converter</h1>
+          <label htmlFor="minutes">Minutes</label>
+          <input
+            value={minutes}
+            id="minutes"
+            placeholder="Minutes"
+            type="number"
+            onChange={onChange} // onChange 이벤트: 값이 변경될 때마다 함수를 실행시킨다.
+          />
+          <h4>You want to convert {minutes}</h4>
+          <label htmlFor="hours">Hours</label>
+          <input id="hours" placeholder="Hours" type="number" />
+        </div>
+      );
+    }
+    ReactDOM.render(<App />, root);
+  </script>
+```
+
