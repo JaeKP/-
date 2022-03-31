@@ -399,6 +399,8 @@ state를 세팅하는 데는 2가지 방법이 있다.
 
 ### 4) Inputs and State
 
+`주의 사항`
+
 ```javascript
   function App() {
       return (
@@ -447,3 +449,141 @@ state를 세팅하는 데는 2가지 방법이 있다.
   </script>
 ```
 
+- input의 value를 state로 연결해주었다. 
+  - 어디서든 input의 value를 수정해줄 수 있다.
+  - 외부에서 수정이 가능하다. 
+  - 만약 onChange함수가 없다면 데이터를 업데이트 할 수 없을 것이다.
+    - input의 value는 default가 0인 state이기때문에 입력창에 0으로 써져있고 수정할 수 가 없는 상태가 될 것이다.  
+- onChange 함수는 데이터를 업데이트 해주는 역할을 한다. 
+  - input에서 리스닝하는 데이터는 스스로 업데이트한다. 
+- return()에 `div`태그를 사용하는 이유 
+  - [참고자료](https://velog.io/@lilyoh/React-Fragments-%EC%82%AC%EC%9A%A9%EC%9D%B4%EC%9C%A0-%EB%B0%8F-%EC%82%AC%EC%9A%A9%EB%B2%95)
+  - 리액트에서는 하나의 컴포넌트가 여러 개의 엘리먼트들을 반환한다. 그래서 return 문 안에는 반드시 하나의 최상위 태그가 있어야 한다.
+  - 이는 리액트가 하나의 컴포넌트만을 리턴할 수 있기 때문이다.
+
+
+<br>
+
+`시간단위를 변환하는 프로그램`
+
+State를 바탕으로 UI를 구성한다. 
+
+```javascript
+<script type="text/babel">
+    const root = document.getElementById("root");
+    function App() {
+      const [amount, setAmount] = React.useState(0);
+      const [flipped, setFlipped] = React.useState(false);
+      const onChange = (event) => {
+        setAmount(event.target.value);
+      };
+      const reset = () => setAmount(0);
+      // !flipped은 filpped의 부정 명제이다.
+      const onFlip = () => {
+        reset();
+        setFlipped((current) => !flipped);
+      };
+      return (
+        <div>
+          <div>
+            <h1>Super Converter</h1>
+            <label htmlFor="minutes">Minutes</label>
+            <input
+              // flipped된 상태가 아니면 값을 그대로 보여준다.
+              // flipped된 상태면 변환된 값을 보여준다.
+              value={flipped ? amount * 60 : amount}
+              id="minutes"
+              placeholder="Minutes"
+              type="number"
+              onChange={onChange}
+              // flipped === true: flipped가 true라면.. (조건문)
+              // disabled={flipped === true}
+              disabled={flipped}
+            />
+          </div>
+
+          <div>
+            <h4>You want to convert</h4>
+            <label htmlFor="hours">Hours</label>
+            <input
+              // flipped된 상태면 값을 그대로 보여준다.
+              // flipped된 상태가 아니면 변환된 값을 보여준다.
+              value={flipped ? amount : Math.round(amount / 60)}
+              id="hours"
+              placeholder="Hours"
+              type="number"
+              onChange={onChange}
+              // flipped === false: flipped가 false라면.. (조건문)
+              // disabled={flipped === false}
+              disabled={!flipped}
+            />
+          </div>
+          <button onClick={reset}>Reset</button>
+          <button onClick={onFlip}>{flipped ? "Turn back" : "Invert"}</button>
+        </div>
+      );
+    }
+    ReactDOM.render(<App />, root);
+  </script>
+```
+
+- flipped는 단순히 true 혹은 false인 변수이다. 
+- flip버튼을 누르면, onFlip 함수가 실행되는데 onFlip함수는 현재 값을 받아서 그 반대 값을 내놓는다는 것이다. 
+
+- `disabled={flipped===true}`와 같이 속성을 전달 할 수 있다. 
+  - `disabled={flipped}`처럼 간단하게 표현 가능
+  - `disabled={!flipped}`처럼 간단하게 표현 가능
+
+- Hours 입장에서 Minutes에 값이 입력 되었을 때는 단위변환이 , Hours에 값을 입력할 때는 그냥 입력한 값이 그대로 보여주어야한다. 
+- Minutes 입장에서 Hours에 값이 입력 되었을 때는 단위변환이 , Minutes에 값을 입력할 때는 그냥 입력한 값이 그대로 보여주어야한다. 
+
+<br>
+`변환기 선택`
+
+컴포넌트는 그 안에 또다른 컴포넌트를 렌더링 할 수 있다.
+
+```javascript
+  <script type="text/babel">
+    function MinutesToHours() {...
+    }
+    function KmToMiles() {
+      return <h3>KM 2 M</h3>;
+    }
+                               
+    function App() {
+      const [index, setIndex] = React.useState("xx");
+      const onSelect = (event) => {
+        setIndex(event.target.value);
+      };
+      return (
+        // 컴포넌트는 그 안에 또다른 컴포넌트를 렌더링 할 수 있다.
+        // <MinutesToHours/>
+        // <KmToMiles/>
+        <div>
+          <h1>Super Converter</h1>
+          <select value={index} onChange={onSelect}>
+            <option value="xx">Select your units</option>
+            <option value="0">Minutes & Hours</option>
+            <option value="1">Km & Miles</option>
+          </select>
+          <hr />
+          {index === "xx" ? "Please Select Yout Units" : null}
+          {index === "0" ? <MinutesToHours /> : null}
+          {index === "1" ? <KmToMiles /> : null}
+        </div>
+        // 위의 경우 그냥 if를 적으면 문자로 인식한다. 중괄호 안에 적어야 JS문법으로 인식한다.
+      );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+```
+
+- 컴포넌트는 그 안에 또 다른 컴포넌트를 렌더링 할 수 있다. 
+- state를 변화시킬 때, 모든게 새로고침 된다. (새로운 데이터와 함꼐.. )
+- useState의 두번째 인자인 modifier함수를 실행하면 해당 컴포넌트가 리렌더링 된다.
+  - props이 수정
+  - state 수정
+  - 부모 컴포넌트가 리렌더링 될 때
+
+<br>
