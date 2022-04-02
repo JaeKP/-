@@ -231,18 +231,16 @@ def dfs(graph, v):  # graph: 그래프  # v: 시작 정점
     visited[v] = True
 
     while stack:                 # 스택이 비워지면 끝난다!
-        v = stack[-1]
-        for i in range(V + 1):
-            if graph[v][i] == 1 and visited[i] == False:  # 인접 정점이고 방문하지 않았다면
-                visited[i] = True                         # 방문!
+        v = stack.pop()
+        for i in graph[v]:
+            if visited[i] == False:  # 인접 정점이고 방문하지 않았다면
+                visited[i] = True    # 방문!
                 stack.append(i)
                 result.append(i)                                    
-                break
-        else:
-            stack.pop()                             # 인접 정점중에 방문하지 않은 정점이 없다면 pop! 
+                
     return result
 
-print(*dfs(adj, 1))      # 1 2 4 6 5 7 3 
+print(*dfs(adj, 1))      # 1 2 3 7 6 4 5
 ```
 
 <br>
