@@ -137,7 +137,7 @@
 ```
 
 - props로 전달할 데이터의 종류와 타입은 PropTypes라는 패키지로 지정할 수 있다
-- PropTypes로 전달하는 데이터의 defaul는 선택 사항히다 
+- PropTypes로 전달하는 데이터의 default는 선택 사항이다 
 - 반드시 보내야 할 데이터의 속성 같은 경우 `isRequired`를 붙인다.
 
 <br>
@@ -157,5 +157,176 @@ npm start
 - Adding a CSS Modules Stylesheet (React에서 CSS Module 사용하기)
   - 이 프로젝트는 [name].module.css 파일 명명 규칙을 사용하여 일반 스타일시트와 함께 CSS 모듈을 지원합니다. CSS 모듈을 사용하면 이름 충돌에 대한 걱정 없이 다른 파일에서 동일한 CSS 클래스 이름을 사용할 수 있습니다.
   - https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/
+
+<br>
+
+### 1) useEffect
+
+**가끔은 우리가 특정 코드의 실행을 제한하고 싶어한다.** 
+
+**=> 원래 새로운 데이터가 들어올 때마다 refresh 하지만 이를 막아야 할 때도 있다.** 
+
+- state를 변화시킬 때 component를 재실행 시키는 것을 방어하는 것을 의미한다. 
+- UI관점으로 보면, 새로운 데이터가 들어올 때 마다 자동으로 새로고침 되는 것은 좋지만, 어떤 코드들은 계속 실행되면 안 될 수도 있기 때문에 useEffect를 사용함으로서 코드를 언제실행할 시 선택할 수 있는 것이다. 
+
+> 예를들어 state를 변경할 때 모든 code 들을 항상 다시 실행되는데, 
+>
+> 첫 번째 render에만 코드가 실행되고 다른 state변화에는 실행되지 않도록 만들 수 없을까? 
+>
+> (한번만 받아도 될 정보가 계속 리렌더링 되어 불려지는 것을 방지한다. )
+
+
+
+`useEffect` 두 개의 인자를 가지는 함수이다. 
+
+- 첫번째 인자는 우리가 딱 한번만 실행하고 싶어하는 코드이다.
+- 두번째 인자는 배열이다. 
+  - 빈배열로 두면 코드를 단 한 번 실행한다. 
+  - 리스트의 값이 변할 때만 실행된다. 
+
+```javascript
+// useEffect 추가
+import { useState, useEffect } from "react";
+
+function App() {
+  const [counter, setValue] = useState(0);
+  const onClick = () => setValue((prev) => prev + 1);
+  console.log("call an api");
+  console.log("i run all the time");
+
+  // console.log("CALL THE API....")는 State가 변경되어도 다시 실행되지 않는다.
+  // 무슨 일이 일어나도 코드는 처음에 renderr가 되는 단 한번만 실행된다.
+  useEffect(() => {
+    console.log("CALL THE API....");
+  }, []);
+
+  return (
+    <div>
+      <h1>{counter}</h1>
+      <button onClick={onClick}>click me</button>
+    </div>
+  );
+}
+export default App;
+```
+
+<br>
+
+#### `usememo`와의 차이점 (from. 댓글창)
+
+참고 자료: https://ko.reactjs.org/docs/hooks-reference.html#usememo
+
+참고 자료: https://ko.reactjs.org/docs/hooks-reference.html#usememo 
+
+- useMemo의 경우 "생성"함수에 관련된 기능이다. 생성자 함수가 고비용(처리 시간이 오래 걸리는 등)인 경우 렌더링마다 계산하는 것은 처리 시간이 오래 걸리므로 값을 기억해놓고 의존성이 변경되었을 경우에만 다시 계산해주는 기능!
+
+- useEffect의 경우는 api 호출, 타이머 등 렌더링 과정에서 한 번만 호출해도 될 기능이 렌더링마다 실행되거나, 호출과정에서 렌더링에 영향을 끼칠 수 있는 것을 모아서 따로 처리하기 위한 기능입!
+
+**둘의 결정적인 차이는 useEffect는 해당 컴포넌트의 렌더링이 완료된 후에 실행되지만, useMemo는 렌더링 중에 실행되는 차이가 있다.**
+
+<br>
+
+```javascript
+// useEffect 추가
+import { useState, useEffect } from "react";
+
+function App() {
+  const [counter, setValue] = useState(0);
+  const [keyword, setKeyword] = useState("");
+  const onClick = () => setValue((prev) => prev + 1);
+  const onChange = (event) => setKeyword(event.target.value);
+
+  // component가 생성될 때, 단 한 번 실행된다.
+  useEffect(() => {
+    console.log("I run only once.");
+  }, []);
+
+  // 생성 시, counter가 업데이트 때 마다 다시 실행된다.
+  useEffect(() => {
+    console.log("I run when 'counter' changes.");
+  }, [counter]);
+
+  // 생성 시 , keyword가 길이가 5보다 길 때 다시 실행된다.
+  useEffect(() => {
+    if (keyword !== "" && keyword.length > 5) {
+      console.log("I run when 'keyword' changes.");
+    }
+  }, [keyword]);
+
+  // 생성 시,  keyword, counter 둘 중 하나만 업데이트 되어도 다시 실행된다. 
+  useEffect(() => {
+    console.log("I run when keyword & counter change");
+  }, [keyword, counter]);
+  
+  return (
+    <div>
+      <input
+        value={keyword}
+        onChange={onChange}
+        type="text"
+        placeholder="Search here..."
+      />
+      <h1>{counter}</h1>
+      <button onClick={onClick}>click me</button>
+    </div>
+  );
+}
+export default App;
+```
+
+<br>
+
+#### (1) Cleanup
+
+참고자료: https://ko.reactjs.org/docs/hooks-effect.html#effects-with-cleanup 
+
+참고자료: https://simsimjae.tistory.com/401
+
+```javascript
+import { useState, useEffect } from "react";
+
+function Hello() {
+  useEffect(function () {
+    console.log("hi :)");
+    // clean-up function
+    // component가 사라지거나 destroy될 때 실행될 함수
+    return function () {
+      console.log("bye :(");
+    };
+  }, []);
+  
+  // ====================================
+  function byFn() {
+    console.log("bye :(");
+  }
+  function hiFn() {
+    console.log("created :)");
+    return byFn;
+  }
+  useEffect(hiFn, []);
+
+  // ====================================
+  useEffect(() => {
+    console.log("hi :)");
+    return () => console.log("bye :(");
+  }, []);
+  return <h1>Hello</h1>;
+}
+  // ====================================
+
+function App() {
+  const [showing, setShowing] = useState(false);
+  const onClick = () => setShowing((prev) => !prev);
+  return (
+    <div>
+      {/* Hello 컴포넌트를 hide 할 때 컴포넌트가 스크린에서 지워진다. */}
+      {/* show를 누르면 컴포넌트가 다시 생성되므로 useEffect도 실행된다. */}
+      {showing ? <Hello /> : null}
+      <button onClick={onClick}>{showing ? "Hide" : "Show"}</button>
+    </div>
+  );
+}
+export default App;
+```
 
 <br>
