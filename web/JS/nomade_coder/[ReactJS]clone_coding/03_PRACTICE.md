@@ -331,5 +331,81 @@ npm i react-router-dom@5.3.0
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 ```
 
-그래서 페이지 별로 파일을 만들고, 
+페이지 별로 파일을 만들고, 관리한다. 
+
+<br>
+
+- URL별 페이지 연동
+
+```react
+<!-- App.js --> 
+
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Detail from "./routes/Detail";
+import Home from "./routes/Home";
+
+// router를 render한다.
+// router는 url을 보고 있는 component이다.
+
+function App() {
+  // 라우터 컴포넌트 생성
+  // switch는 Route를 찾는 역할을 한다.(한 번에 하나의 route만 랜더링하기 위해)
+  // Route(url)를 찾으면 컴포넌트를 랜더링한다.
+  return (
+    <Router>
+      <Switch>
+        {/* 유저가 '/movie'경로에 있으면 Detail Route를 랜더링 한다. */}
+        <Route path="/movie">
+          <Detail />
+        </Route>
+        {/* 유저가 '/'경로에 있으면 Home Route를 랜더링 한다. */}
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </Router>
+  );
+}
+
+export default App;
+```
+
+<br>
+
+- 링크를 통한 페이지 연결
+
+```javascript
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+
+function Movie({ coverImg, title, summary, genres }) {
+  return (
+    <div>
+      <div>
+        <img src={coverImg} />
+        {/*  다른 페이지로 이동시켜주는 컴포넌트*/}
+        {/* html의 a태그와의 큰 차이점: 이동은 하지만 새로고침하지 않는다.  */}
+        <h2>
+          <Link to="/movie">{title}</Link>
+        </h2>
+        <p>{summary}</p>
+        <ul>
+          {genres.map((g) => (
+            <li key={g}>{g}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+Movie.propTypes = {
+  coverImg: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  summary: PropTypes.string.isRequired,
+  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+export default Movie;
+```
 
