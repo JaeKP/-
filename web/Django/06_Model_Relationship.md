@@ -1,5 +1,7 @@
 # Model Relationship (1:N)
 
+[toc]
+
 ## 1. Comment CRD
 
 ### 1) Foregin Key
@@ -452,7 +454,7 @@ class CustomUserChangeForm(UserChangeForm):
 
 
 class CustomUserCreationForm(UserCreationForm):
-    class Meta(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
         model = get_user_model()  
         fields = UserCreationForm.Meta.fields + ('email',)
 ```
@@ -489,7 +491,7 @@ class CustomUserCreationForm(UserCreationForm):
     ...
     ```
     
-    **현재 UserCreationForm에 있는 fields는 `password1`, `password2`, `username`이기 떄문에 이 세가지 필드를 의미한다.**
+    **현재 UserCreationForm에 있는 fields는  `username`필드를 의미한다.**
     
     **뒤에 추가하길 원하는 필드를 작성할 수도 있다.** 
 
@@ -559,6 +561,7 @@ class Comment(models.Model):
 일반적으로 `AUTH_USER_MODEL`은 models.py에서만 사용된다. 그외의 모든 곳에서는  `get_user_model`이 사용된다. 
 
 models.py에서만 AUTH_USER_MODEL을 사용하는 것은 앱 등록 순서와 관련이 있다. 
+앱을 등록한 순서대로 models.py에 접근하는데 account앱의 Custom User Model을 모르는 상황에서 앞에 있는 앱에서 User Model을 참조하면 제대로 작동하지 않을 수 있다. 
 
 <br>
 

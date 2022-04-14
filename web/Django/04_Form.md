@@ -1,5 +1,7 @@
 # Form
 
+[toc]
+
 > Django의 form기능은 유효성 검증을 편리하게 하는 기능을 제공한다. 
 
 ## 1. Django Form class
@@ -284,6 +286,8 @@ class ArticleForm(forms.ModelForm):
 #### (2) widget
 
 > Django의 HTML input element를 표현한다. 
+>
+> model field 에 따라 form field 가 결정되고 form field 에 따라 Widget 이 결정된다.
 
 위의 방식 처럼 메타클래스와 따로 위젯을 기입하는 것을 추천한다. 
 
