@@ -69,7 +69,7 @@ body a {
 
 ### 2. float , flex, grid 등
 
-그냥 정렬이 편한 속성을 사용하는 게 좋은듯.. 정리 귀찮다..  
+그냥 정렬이 편한 속성을 사용하는 게 좋다.
 
 <br>
 
@@ -91,7 +91,7 @@ body a {
 
 특히, 이미지의 경우 이런 일이 빈번하게 발생하는데
 
-- 이미지에 `vertical-align`속성을 'top', 'middle', 'bootom'중 지정해주면 해결된다.
+- 이미지에 `vertical-align`속성을 'top', 'middle', 'botom'중 지정해주면 해결된다.
   -  인라인 정렬 기준을 base line에서 vertical-align속성으로 변경! 
 
 ✏ 관련 문서https://developer.mozilla.org/ko/docs/Web/CSS/vertical-align

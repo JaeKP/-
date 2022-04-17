@@ -1,0 +1,187 @@
+/* menu */
+.menu-item {
+  /* 인터넷 익스플로어에서는 flex-grow가 transition의 효과를 받지 못한다. */
+  /* flex-grow: 1; */
+  width: 25%;
+  background-color: gold;
+
+  /* transition: CSS 속성을 변경할 때 애니메이션 속도에 대한 속성 */
+  transition: 0.5s;
+}
+.menu-item:hover {
+  /* flex-grow: 1.5; */
+  width: 35%;
+  background-color: crimson;
+}
+
+/* a태그는 인라인이기 때문에 글자에만 클릭이 가능하다. */
+/* 클릭 범위를 넓게 하기 위해 block으로 수정한다.  */
+.menu-link {
+  display: block;
+  padding: 1em;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #555;
+  text-decoration: none;
+  text-align: center;
+}
+
+.menu-link:hover {
+  color: white;
+}
+
+.menu {
+  display: flex;
+}
+
+/* ================================================ */
+/* search */
+.search-form {
+  display: flex;
+  /* flex-item의 align-items의 기본적인 속성은 strech이기 때문에 부모의 높이만큼 item은 늘어난다. */
+  height: 40px;
+}
+
+.search-form input[type="search"] {
+  flex: 1;
+  margin-right: 10px;
+  border: 0;
+  border-radius: 0.3em;
+  font-size: 1rem;
+}
+
+.search-form input[type="submit"] {
+  width: 4em;
+  border: 0;
+  border-radius: 0.3em;
+  font-size: 1rem;
+  background-color: gold;
+}
+
+/* ================================================ */
+/* bullet list */
+
+/* item안에 bullet과 text요소가 들어간 것이다. */
+.info-list-item {
+  margin: 0.5em 0;
+  display: flex;
+}
+
+/* before: 요소의 콘텐츠 시작부분에 생성된 콘텐츠를 추가한다.  */
+.info-list-item:before {
+  content: "❤️";
+  margin-right: 0.5em;
+}
+
+/* ================================================ */
+/* message */
+.user-photo {
+  width: 50px;
+  height: 50px;
+  margin-right: 0.5em;
+  border: 2px solid #333;
+  border-radius: 50%;
+  background-color: gold;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* background-size: 요소 배경 이미지의 크기를 설정한다. */
+  /* contain: 이미지가 잘리거나 찌그러지지 않는 한도 내에서 제일 크게 설정된다. */
+  /* cover: 이미지가 잘리거나 찌그러지지 않는 한도에서 제일 크게 설정된다. 이미지의 가로 세로비가 요소와 다르다면 이미지를 세로 또는 가로방향으로 잘라내어 빈 공간이 생기지 않도록한다.  */
+  /* auto: 배경 이미지의 원본 크기를 유지한다.  */
+  background-size: 150%;
+
+  /* 콘텐츠가 없기때문에 넓이 유지를 하지 못하고 자동으로 줄어드는 것을 막는다. */
+  flex-shrink: 0;
+}
+
+.user-item {
+  display: flex;
+  margin-bottom: 1.5em;
+}
+
+/* ================================================ */
+/* friend list */
+.friend-item {
+  align-items: center;
+}
+
+/* text-overflow: overflow항목이 hidden일때 어떻게 유저에게 표현을 하는지 설정하는 속성 */
+.user-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ================================================ */
+/* modal */
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.dialog {
+  width: 50vw;
+  padding: 2em;
+  border-radius: 1em;
+  background: white;
+}
+
+/* ================================================ */
+/* cards */
+.card-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.card-image {
+  background-color: lightgray;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  /* img를 display:none했기 때문에 figure태그의 콘텐츠는 없다. => height가 없다. 그래서 직접 부여해준다. */
+  /* 하지만 반응형 박스를 만들기 위해 세로방향을 패딩을 이용한다.*/
+  /* 너비의 60%가 높이가 된다.*/
+  height: 0;
+  padding-bottom: 60%;
+}
+
+.card-image img {
+  display: none;
+}
+
+.card-desc {
+  background-color: white;
+  padding: 1em;
+  flex: 1 1 auto;
+}
+
+@media (min-width: 600px) {
+  .card-list-con {
+    /* over-flox-x:hidden 왼쪽과 오른쪽의 내용이 넘칠때 내용이 잘리고 스크롤바가 나타나지 않는다. */
+    overflow-x: hidden;
+  }
+  .card-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -1rem;
+  }
+  .card-item {
+    width: 50%;
+    padding: 0 1rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card-item {
+    width: 33.33333%;
+  }
+}
