@@ -230,6 +230,8 @@ export default App;
 
 ### 2) Prop와 Component 활용
 
+> App.js와 Movie.js(컴포넌트)로 나눈다. 
+
 ```react
 // App.js
 
@@ -372,7 +374,7 @@ export default App;
 
 <br>
 
-- 링크를 통한 페이지 연결
+- 링크를 통한 페이지 연결 `<Link to="">`
 
 ```javascript
 import PropTypes from "prop-types";
@@ -407,5 +409,153 @@ Movie.propTypes = {
 };
 
 export default Movie;
+```
+
+<br>
+
+#### (2) 다이나믹 (동적) url 
+
+> url에 변수를 넣을 수 있다. 파라미터 생성!
+
+```react
+// App.js
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Detail from "./routes/Detail";
+import Home from "./routes/Home";
+
+
+function App() {
+  return (
+    <Router>
+      <Switch>
+        {/* 유저를 /movie/변수의 경로로 보낸다.*/}
+        {/* 이렇게 되면 Movie 컴포넌트에서 id 값을 불러와야한다.  */}
+        <Route path="/movie/:id">
+          <Detail />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </Router>
+  );
+}
+
+export default App;
+
+```
+
+
+
+- Home.js에서 id props를 Movie.js로 보내준다!
+
+```react
+// Home.js
+import { useState, useEffect } from "react";
+import Movie from "../components/Movie";
+
+// App component의 코드가 Home component로 이동
+function Home() {
+  const [loading, setLoading] = useState(true);
+  const [movies, setMovies] = useState([]);
+  useEffect(() => {
+    fetch(
+      "https://yts.mx/api/v2/list_movies.json?minimum_rating=9&sort_by=year"
+    )
+      .then((response) => response.json())
+      .then((json) => {
+        setMovies(json.data.movies);
+        setLoading(false);
+      });
+  }, []);
+  return (
+    <div>
+      {loading ? (
+        <h1>Loading...</h1>
+      ) : (
+        <div>
+          {/* props로 id를 보낸다. */}
+          {movies.map((movie) => (
+            <Movie
+              key={movie.id}
+              id = {movie.id}
+              coverImg={movie.medium_cover_image}
+              title={movie.title}
+              summary={movie.summary}
+              genres={movie.genres}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default Home;
+```
+
+```react
+// Movie.js
+
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+
+function Movie({id, coverImg, title, summary, genres }) {
+  return (
+    <div>
+      <div>
+        <img src={coverImg} />
+        <h2>
+            {/* props로 받은 id를 활용하여 페이지 연결! */}
+          <Link to={`movie/${id}`}>{title}</Link>
+        </h2>
+        <p>{summary}</p>
+        <ul>
+          {genres.map((g) => (
+            <li key={g}>{g}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+Movie.propTypes = {
+  id: PropTypes.number.isRequired,
+  coverImg: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  summary: PropTypes.string.isRequired,
+  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+export default Movie;
+```
+
+<br>
+
+
+
+`useParams`활용 
+
+`useParams`는 URL 인자들의 key/value(키/값) 짝들의 객체를 반환한다. 파라미터를 key, value쌍으로!
+
+```react
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+function Detail() {
+  const { id } = useParams();
+  const getMovie = async () => {
+    const json = await (
+      await fetch(`https://yts.mx/api/v2/movie_details.json?movie_id=${id}`)
+    ).json();
+    console.log(json);
+  };
+  useEffect(() => {
+    getMovie();
+  }, []);
+  return <h1>Detail</h1>;
+}
+
+export default Detail;
 ```
 

@@ -738,7 +738,7 @@ def update(request):
 
 ```python
 # accounts/views.py
-
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
