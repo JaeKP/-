@@ -100,7 +100,7 @@
 
 <br>
 
-## SQL
+## 2. SQL
 
 > Structured Quety Language
 
@@ -201,8 +201,9 @@ DROP TABLE classmates;
 - 열 속성
 
   - `PRIMARY KEY`: PK기능을 하는 column이 되며, 데이터의 자료형은 무조건 integer여야 한다.
-  -  `AUTOINCREMENT`
-
+  - `AUTOINCREMENT`: SQLite가 사용되지 않은 값이나 이전에 삭제된 행의 값을 재사용하는 것을 방지한다. 
+    - SQListe는 기본적으로 id를 재사용한다.
+    - django에서는 기본 값으로 사용되는 설정이다.
   - `NOT NULL`: NULL 값이 존재하지 않는다.
 
 - sqlite는 따로 `PRIMARY KEY`속성의 컬럼을 작성하지 않으면 값이 자동으로 증가하는 PK옵션을 가진 rowid 컬럼을 정의한다. 
@@ -240,6 +241,14 @@ INSERT INTO classmates VALUES
 ```
 
 - `NOT NULL`속성을 가진 컬럼의 데이터는 공백으로 비워두면 안된다. 
+
+- `PRIMARY KEY`속성을 가진 id를 명시적으로 작성하여 스키마를 작성한 경우, 다음과 같이 INSERT 할 수 있다.
+
+  ```sqlite
+  INSERT INTO classmates (name, age, address) VALUES ('홍길동', 30, '서울')
+  
+  INSERT INTO classmates VALUES (1, '홍길동', 30, '서울')
+  ```
 
 <br>
 
@@ -298,6 +307,7 @@ where address = '서울';
 > 쿼리에서 반환되는 행 수를 제한한다.
 
 **특정 행부터 시작해서 조회하기 위해 OFFSET 키워드와 함께 사용하기도 한다.** 
+
 ```sqlite
 SELECT [컬럼1], [컬럼2],.. FROM [테이블 이름] LIMIT [숫자];
 
@@ -351,11 +361,11 @@ age
 
 <br>
 
-#### (4) SQLITE Aggregate Funcion
+#### (4) SQLITE Aggregate Function
 
 > 집계 함수
 >
-> 값 집합에 대한 계산을 수행하고 단일 값을 반환한다.
+> 값 집합에 대한 계산을 수행하고 **단일 값**을 반환한다.
 
 **여러 행으로부터 하나의 결괏값을 반환하는 함수이고 SELECT구문에서만 사용된다.**
 
@@ -480,13 +490,15 @@ SELECT * FROM [테이블 이름] ORDER BY [컬럼1], [컬럼2] DESC;
 **문장에 WHERE 절이 포함된 경우 반드시 WHERE 절 뒤에 작성해야 한다.** 
 
 ```sqlite
-SELECT [컬럼1], affregate_function(칼럼2) FROM [테이블 이름] GROUP BY [컬럼1], [컬럼2]
+SELECT [컬럼1], aggregate_function(칼럼2) FROM [테이블 이름] GROUP BY [컬럼1], [컬럼2]
 
--- AS를 활용하여 affregate_function에 해당하는 컬럼 명을 바꿔서 조회할 수 있다. 
-SELECT [컬럼1], affregate_function(컬럼2) AS [대체 이름] FROM [테이블 이름] GROUP BY [컬럼1], [컬럼2]
+-- AS를 활용하여 aggregate_function에 해당하는 컬럼 명을 바꿔서 조회할 수 있다. 
+SELECT [컬럼1], aggregate_function(컬럼2) AS [대체 이름] FROM [테이블 이름] GROUP BY [컬럼1], [컬럼2]
 ```
 
 ```sqlite
+--users에서 각 성(last_name)씨가 몇 명씩 있는지 조회한다면?
+
 SELECT last_name, COUNT(*) AS name_count FROM users GROUP BY last_name;
 ```
 
@@ -513,6 +525,8 @@ SET address='서울', age='100', name='김길동'
 WHERE rowid=4;
 ```
 
+- Unique한 값인 rowid 기준으로 수정한다. 
+
 <br>
 
 ### 6) CRUD: Delete 데이터 삭제
@@ -526,6 +540,8 @@ DELETE FROM [테이블 이름];
 -- 원하는 레코드 삭제
 DELETE FROM [테이블 이름] WHERE [조건];
 ```
+
+- Unique한 값인 rowid 기준으로 삭제한다.
 
 <br>
 

@@ -18,7 +18,7 @@
 
 
 
-예를 들어,  한 게시글(Article)에는 여러개의 댓글(Commnet)가 달릴 수 있다. 과연 어떻게 DB테이블을 연동시킬까? 
+예를 들어,  한 게시글(Article)에는 여러개의 댓글(Comment)가 달릴 수 있다. 과연 어떻게 DB테이블을 연동시킬까? 
 
 - 참조되는 테이블 (Article 테이블)
 
@@ -68,7 +68,7 @@
 
 `데이터 무결성`
 
-> 데이터의 정확성과 일관성을 유지하고 보증낳는 것을 가리키며, 데이터 베이스나 RDBMS 시스템의 중요한 기능이다.
+> 데이터의 정확성과 일관성을 유지하고 보증하는 것을 가리키며, 데이터 베이스나 RDBMS 시스템의 중요한 기능이다.
 
 - 개체 무결성 
   - PK의 개념과 관련이 있다.
@@ -76,6 +76,7 @@
 - 참조 무결성
   - FK(외래키) 개념과 관련이 있다. 
   - FK 값이 데이터 베이스의 특정 테이블의 PK 값을 참조하는 것이다. 
+    (기본 키와 참조 키 간의 관계가 항상 유지됨을 보장)
 - 범위(도메인) 무결성
   - 정의된 형식(범위)에서 관계형 데이터베이스의 모든 칼럼이 선언되도록 규정한다.
 
@@ -286,7 +287,7 @@ def comments_create(request, pk):
 ```
 
 - `.save(commit=False)`
-  - Create, but don't save the nuw instance
+  - Create, but don't save the new instance
   - 아직 데이터베이스에 저장되지 않은 인스턴스를 반환한다.
   - 저장하기 전에 객체에 대한 사용자 지정 처리를 수행할 때 유용하게 사용한다. 
 
@@ -676,6 +677,25 @@ def update(request, pk):
         'form': form,
     }
     return render(request, 'articles/update.html', context)
+
+```
+
+<br>
+
+- detail 페이지에서 코멘트가 볼 수있도록 관련 데이터를 전달한다.
+
+```python
+@require_safe
+def detail(request, pk):
+    article = get_object_or_404(Article, pk=pk)
+    comment_form = CommentForm() # 인스턴스 생성
+    comments = article.comment_set.all()
+    context = {
+        'article': article,
+        'comment_form': comment_form,
+        'comments': comments,
+    }
+    return render(request, 'articles/detail.html', context)
 
 ```
 
