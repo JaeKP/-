@@ -1,0 +1,146 @@
+.header {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  height: 80px;
+
+  /* 좌우 여백 주기 */
+  padding: 0 1rem;
+}
+
+/* 왼쪽에 가능한한 가장 큰 마진을 준다 => 제일 오른쪽에 붙게된다. */
+.search-form {
+  margin-left: auto;
+}
+
+/* search가 아닌 search-form을 수정하는 이유는 컨테이너의 너비를 수정하면 저절로 search도 수정되기 때문이다. */
+.search-form {
+  width: 300px;
+  max-width: 60%;
+  margin-right: 3rem;
+}
+
+.primary {
+  padding: 1rem;
+}
+
+.secondary {
+  padding: 1rem;
+}
+
+.secondary-a {
+  background-color: white;
+}
+
+.secondary-b {
+  color: white;
+  background-color: #666;
+}
+
+.footer {
+  padding: 1rem;
+  text-align: center;
+}
+
+.modal {
+  display:none;
+
+  /* 헤더에는 공간을 주지 않기 위함 */
+  top:80px;
+}
+
+
+/* ~ 결합자는 형제, 즉 첫 번째 요소를 뒤따르면서 같은 부모를 공유하는 두 번째 요소를 선택합니다. */
+/* + 결합자는 인접 형제, 즉 첫 번째 요소의 바로 뒤에 위치하면서 같은 부모를 공유하는 두 번째 요소를 선택합니다. */
+#modal-switch:checked ~ .modal {
+  display:flex;
+}
+
+/* 상단으로 이동 */
+/* search form에서 margin-right를 줘서 공간을 배분해준다. */
+label[for="modal-switch"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position:absolute;
+  top:1.3rem;
+  right: 1rem;
+  width: 40px;
+  height: 40px;
+}
+
+/* 가상 요소 */
+label[for="modal-switch"]:before {
+  content: "⚑";
+  font-size: 2rem;
+}
+
+#modal-switch:checked ~ label[for="modal-switch"]:before {
+  color: dodgerblue;
+}
+
+
+/* 스크린 리더, SEO 등의 이유로 display:none;, width:0;등의 사용을 피했다.  */
+#modal-switch,
+label[for="modal-switch"] span {
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  /* 크롬에서는 모달이 하단에 위치하는 문제가 있어서 top:0을 추가한다. */
+  top: 0; 
+
+}
+
+/* 아이패드 가로모드부터.. */
+@media (min-width: 1024px){
+  .page{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  /* 이렇게 폭이 칼럼들은 flex-grow보다 width를 사용하는 것이 좋다. */
+  .header{
+    width:100%;
+  }
+  .menu {
+    width:100%;
+  }
+  .secondary {
+    width: 20%;
+  }
+
+  /* order를 준 순간 order를 주지 않은 column은 0순위가 된다.  */
+  .secondary-a {
+    order: 1;
+  }
+  .secondary-b {
+    order: 3;
+  }
+  .primary{
+    width: 60%;
+    order: 2;
+  }
+  .footer{
+    order:4;
+    border-top:1px solid lightgray;
+    width:100%
+  }
+}
+
+@media (min-width:1400px) {
+  .primary {
+    width: calc(100% - 600px);
+  }
+  
+  /* width를 사용하는게 안전하다.  */
+  /* .primary {
+    flex-grow: 1;
+    flex: 1 1 auto;
+    flex: auto;
+  } */
+
+  .secondary {
+    width: 300px;
+  }
+}
