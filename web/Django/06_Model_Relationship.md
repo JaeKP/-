@@ -235,7 +235,7 @@ path('<int:pk>/comments/', views.comments_create, name="comments_create" ),
 <br>
 
 ```python
-# artilces/forms.py
+# articles/forms.py
 
 from django import forms
 from .models import Comment
@@ -395,7 +395,7 @@ class User(AbstractUser):
 ```python
 # settings.py
 
-AUTH_USER_MODEL = 'accouts.User'
+AUTH_USER_MODEL = 'accounts.User'
 ```
 
 - 기존에 Django가 사용하는 User모델이었던 auth 앱의 User 모델을 acoounts앱의 User 모델을 사용하도록 변경한다.
