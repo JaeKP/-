@@ -72,7 +72,7 @@ DOM 관련 객체의 상속 구조
 
 | HTMLCollection                                        | NodeList                                                     |
 | ----------------------------------------------------- | ------------------------------------------------------------ |
-| 각 항목에 접근하기 위한 index를 제공한다. (유사 배열) | 각 항목에 접근하기 위한 index를 제공한다. (유사 배열         |
+| 각 항목에 접근하기 위한 index를 제공한다. (유사 배열) | 각 항목에 접근하기 위한 index를 제공한다. (유사 배열)        |
 | name, id, index 속성으로 각 항목에 접근이 가능하다.   | index로만 각 항목에 접근이 가능하다. <br />단, HTMLCollection과 달리 배열에서 사용하는 forEach 메서드 및 다양한 메서드를 사용 가능하다. |
 
 둘 다 LiveCollection으로 DOM의 변경사항을 실시간으로 반영하지만, querySelectorAll()에 의해 반환되는 NodeList는 StaticCollection으로 실시간으로 반영되지 않는다.  LiveCollection은 선택한 Element 동적으로 변화하기 때문에 해당 element를 원하는 대로 조작하기 어렵다!!! 
@@ -138,8 +138,6 @@ ulTag.appendChild(newLiTag);
 | Node객체와 DOMstring객체를 추가 할 수 있다. | Node객체만 추가할 수 있다.         |
 | 여러 Node 객체와 문자열을 추가할 수 있다.   | 하나의 Node 객체만 추가할 수 있다. |
 | 반환 값이 없다.                             | 추가된 Node객체를 반환한다.        |
-
-<br>
 
 <br>
 
@@ -224,7 +222,7 @@ const header = document.querySelector(".container");
 header.remove();
 ```
 
-- ChileNode를 삭제한다. (Node가 속한 트래에서 해당 Node를 제거한다. )
+- ChileNode를 삭제한다. (Node가 속한 트리에서 해당 Node를 제거한다. )
 
 <br>
 
@@ -288,7 +286,7 @@ btn.addEventListener('click', function (event) {
   - 이벤트가 발생했을 때 할 동작, 일, 명세
   - EventListener 인터페이스 혹은 JS function 객체(콜백 함수)여야 한다. 
 
-
+<br>
 
 ```html
 <!-- 1. onclick 속성 활용 -->
