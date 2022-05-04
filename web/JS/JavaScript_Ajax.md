@@ -65,10 +65,6 @@ console.log(todo)
 
  자바스크립트의 경우, 
 
-
-
-
-
 `사용자 경험`
 
 - 동기식 코드: 데이터를 모두 불러온 뒤 앱이 실행된다. 
@@ -134,7 +130,7 @@ console.log(todo)
 
 ![eventLoop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop/the_javascript_runtime_environment_example.svg)
 
-
+<br>
 
 | 자바스크립트 엔진                       | 설명                                                         |
 | --------------------------------------- | ------------------------------------------------------------ |
