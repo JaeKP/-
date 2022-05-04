@@ -22,7 +22,7 @@ AJAX는 HTML, CSS, JavaScript, DOM 조작, 와 XMLHttpRequest object를 활용�
 
 즉, 페이지 전체를 reload하지 않고서도 수행되는 `비동기성`을 갖고 있다. ( 웹페이지 일부가 리로드 되는 동안에도 코드가 계속 실행되어 비동기식으로 작업할 수 있다. )
 
-
+<br>
 
 ### 1) HTMLHttpRequest
 
@@ -51,7 +51,7 @@ console.log(todo)
 
   => 왜 JS는 기다려주지 않는 방식을 작동하는가. => **자바스크립트는 싱글 스레드이기 때문이다.** (기다릴 시간이 없서요... ㅠㅠ)
 
-
+<br>
 
 ### 2) 동기와 비동기 
 
