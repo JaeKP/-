@@ -6,6 +6,10 @@
 >
 > 이 작업을 통해 사용자(User)는 데이터와 상호작용(Interaction)할 수 있다. 
 
+[toc]
+
+<br>
+
 ### 1) SPA
 
 Single Page Application(단일 페이지 애플리케이션): 현재 페이지를 동적으로 렌더링함으로써 사용자와 소통하는 웹 애플리케이션
@@ -452,7 +456,7 @@ methods: {
 - computed 속성 대신 메소드와 같은 함수를 정의할 수도 있습니다. 최종 결과에 대해 두 가지 접근 방식은 서로 동일하다. 
 - 차이점은 **computed 속성은 종속 대상을 따라 저장(캐싱)된다는 것 이다.**
   -  computed 속성은 해당 속성이 종속된 대상이 변경될 때만 함수를 실행합니다. 
-  - 즉 `message`가 변경되지 않는 한, computed 속성인 `reversedMessage`를 여러 번 요청해도 계산을 다시 하지 않고 계산되어 있던 결과를 즉시 반환합니다.
+  - 즉 `message`가 변경되지 않는 한, computed 속성인 `reversedMessage`를 여러 번 요청해도 계산을 다시 하지 않고 계산되어 있던 결과를 즉시 반환한다.
 - 이에 비해 메소드를 호출하면 렌더링을 다시 할 때마다 **항상** 함수를 실행한다. (즉, 캐싱을 원하지 않는 경우 메소드를 사용하면 된다.)
 
 <br>
@@ -533,11 +537,11 @@ vm.a = 2 // => new: 2, old: 1
 
   데이터를 감시하고 데이터에 변화가 일어났을 때 실행되는 함수이다.
 
-  대부분의 경우 computed 속성이 더 적합하지만 사용자가 만든 감시자가 필요한 경우가 있습니다. 그래서 Vue는 `watch` 옵션을 통해 데이터 변경에 반응하는 보다 일반적인 방법을 제공한다. **이는 데이터 변경에 대한 응답으로 비동기식 또는 시간이 많이 소요되는 조작을 수행하려는 경우에 가장 유용하다.**
+  대부분의 경우 computed 속성이 더 적합하지만 사용자가 만든 감시자가 필요한 경우가 있다. 그래서 Vue는 `watch` 옵션을 통해 데이터 변경에 반응하는 보다 일반적인 방법을 제공한다. **이는 데이터 변경에 대한 응답으로 비동기식 또는 시간이 많이 소요되는 조작을 수행하려는 경우에 가장 유용하다.**
 
-  키가 표시되는 표현식이고 값이 콜백입니다. 값은 메서드 이름이 문자열이거나 추가 옵션이 포함된 Object가 될 수도 있습니다. Vue 인스턴스는 인스턴스 생성시 객체의 각 항목에 대해 `$watch()`를 호출한다.
+  키가 표시되는 표현식이고 값이 콜백입니다. 값은 메서드 이름이 문자열이거나 추가 옵션이 포함된 Object가 될 수도 있다. Vue 인스턴스는 인스턴스 생성시 객체의 각 항목에 대해 `$watch()`를 호출한다.
 
-  __화살표 함수를 감시자에 사용하면 안된다.__ (예를 들어, `searchQuery: newValue => this.updateAutocomplete(newValue)`) 화살표 함수가 부모 컨텍스트를 바인딩하기 때문에 `this`는 Vue 인스턴스가 아니며 `this.updateAutocomplete`는 정의되지 않습니다.
+  __화살표 함수를 사용하면 안된다.__ (예를 들어, `searchQuery: newValue => this.updateAutocomplete(newValue)`) 화살표 함수가 부모 컨텍스트를 바인딩하기 때문에 `this`는 Vue 인스턴스가 아니며 `this.updateAutocomplete`는 정의되지 않는다.
 
 <br>
 
@@ -595,15 +599,158 @@ watch는 데이터 변경에 따른 비동기 작업을 할때 ! (react의 useEf
 
 #### (6) filters
 
+[공식문서](https://kr.vuejs.org/v2/guide/filters.html)
+
+```html
+<!-- interpolation --> 
+{{ message | filterA | filterB }}
+
+<!-- v-bind --> 
+<div v-bind:id="rawId | formatId"></div>
+```
+
+- **타입:** `Object`
+
+- **상세:**
+
+  Vue 인스턴스에서 사용할 수 있도록 만들어진 필터의 해시(텍스트 형식화를 적용할 수 있는 필터)
+
+  이 필터들은 **interpolation 혹은 `v-bind`표현법** 을 이용할 때 사용한다.
+
+  필터는 자바스크립트 표현식 마지막에 `|`와 함께 추가되어야 한다. (chaining도 가능하다.)
+
+  
+
 #### (7) 라이프사이클 훅
 
-<img src="https://kr.vuejs.org/images/lifecycle.png" alt="lifeCycleHook" style="zoom:50%;" />
+<img src="https://kr.vuejs.org/images/lifecycle.png" alt="lifeCycleHook" style="zoom: 50%;" />
+
+
+
+[공식문서](https://kr.vuejs.org/v2/api/#%EC%98%B5%EC%85%98-%EB%9D%BC%EC%9D%B4%ED%94%84%EC%82%AC%EC%9D%B4%ED%81%B4-%ED%9B%85)
+
+- 각 Vue 인스턴스는 생성될 때, 일련의 초기화 단계를 거친다.
+  - 데이터 관찰 설정이 필요한 경우
+  - 인스턴스를 DOM에 마운트하는 경우
+  - 데이터가 변경되어 DOM을 업데이트 하는 경우 등
+- 위와 같은 과정에서 사용자 정의 로직을 실행할 수 있는 Lifecycle Hooks도 호출된다. 
+- 예를 들어, `created` hook은 vue 인스턴스가 생성된 후에 동기적으로 호출 된다. 
+- 모든 라이프사이클 훅은 자동으로 `this` 컨텍스트를 인스턴스에 바인딩하므로 데이터, 계산된 속성 및 메소드에 접근할 수 있다. 
+- 화살표 함수를 사용해 라이프사이클 메소드를 정의하면 안된다.(예: `created: () => this.fetchTodos()`)
+  -  화살표 함수가 부모 컨텍스트를 바인딩 하기 때문에 `this`는 예상대로 Vue 인스턴스가 아니며 `this.fetchTodos`는 정의되지 않는다.
+
+
 
 
 
 ### 2) templates 문법
 
+[공식문서](https://kr.vuejs.org/v2/guide/syntax.html)
 
+랜더링된 DOM을 기본 Vue 인스턴스의 데이터에 선언적으로 바인딩할 수 있는 HTML 기반 템플릿 구문을 사용한다.
 
+#### (1) Interpolation (보간법)
 
+**문자열**
 
+데이터 바인딩의 가장 기본 형태는이중 중괄호을 사용한 텍스트 보간이다.
+
+```html
+<span>메시지: {{ msg }}</span>
+```
+
+<br>
+
+**raw HTML**
+
+이중 중괄호는 HTML이 아닌 일반 텍스트로 데이터를 해석한다. 실제 HTML을 출력하려면 `v-html` 디렉티브를 사용해야 합니다.
+
+```html
+<p>Using mustaches: {{ rawHtml }}</p>
+<p>Using v-html directive: <span v-html="rawHtml"></span></p>
+```
+
+웹사이트에서 임의의 HTML을 동적으로 렌더링하려면 [XSS 취약점](https://en.wikipedia.org/wiki/Cross-site_scripting)으로 쉽게 이어질 수 있으므로 매우 위험할 가능성이 있다. 신뢰할 수 있는 콘텐츠에서만 HTML 보간을 사용하고 사용자가 제공한 콘텐츠에서는 **절대** 사용하면 안된다.
+
+<br>
+
+**Attributes**
+
+이중 중괄호는 HTML 속성에서 사용할 수 없습니다. 대신 [v-bind 디렉티브](https://kr.vuejs.org/v2/api/#v-bind)를 사용한다. 
+
+```html
+<div v-bind:id="dynamicId"></div>
+```
+
+<br>
+
+**JS 표현식 사용**
+
+모든 데이터 바인딩 내에서 JavaScript 표현식의 모든 기능을 지원한다.
+
+```html
+{{ number + 1 }}
+
+{{ ok ? 'YES' : 'NO' }}
+
+{{ message.split('').reverse().join('') }}
+
+<div v-bind:id="'list-' + id"></div>
+```
+
+ ```html
+ <!-- 불가능!--> 
+ <!-- 아래는 구문입니다, 표현식이 아닙니다. -->
+ {{ var a = 1 }}
+ 
+ <!-- 조건문은 작동하지 않습니다. 삼항 연산자를 사용해야 합니다. -->
+ {{ if (ok) { return message } }}
+ ```
+
+<br>
+
+#### (2) Directive
+
+- 디렉티브는 `v-` 접두사가 있는 특수 속성이다. 
+-  디렉티브 속성 값은 **단일 JavaScript 표현식** 이 된다. (`v-for`는 예외) 
+- 디렉티브의 역할은 표현식의 값이 변경될 때 사이드이펙트를 반응적으로 DOM에 적용하는 것 입니다. 
+
+<br>
+
+**전달 인자**
+
+일부 디렉티브는 콜론`:`으로 표시되는 “전달인자”를 사용할 수 있다.
+
+```html
+<!--여기서 href는 전달인자로, 엘리먼트의 href 속성을 표현식 url의 값에 바인드하는 v-bind 디렉티브에게 알려준다. --> 
+<a v-bind:href="url"> ... </a>
+
+<!-- 여기서 전달인자는 이벤트를 받을 이름이다. --> 
+<a v-on:click="doSomething"> ... </a>
+```
+
+<br>
+
+**수식어**
+
+수식어는 점으로 표시되는 특수 접미사로, 디렉티브를 특별한 방법으로 바인딩 해야 함을 나타낸다.
+
+```html
+<!-- .prevent 수식어는 트리거된 이벤트에서 event.preventDefault()를 호출하도록 v-on 디렉티브에게 알려준다. --> 
+<form v-on:submit.prevent="onSubmit"> ... </form>
+```
+
+<br>
+
+| 문법                                                         | 설명                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `v-text`                                                     | 엘리먼트의 textContent를 업데이트한다.<br />내부적으로 interpolation 문법이 v-text로 컴파일 된다. |
+| `v-html`                                                     | 엘리먼트의 innerHTML을 업데이트한다. (XSS 공격에 취약할 수 있다)<br />임의로 사용자로부터 입력 받은 내용은 v-html에 절대 사용을 금한다. |
+| `v-show`<br />Expensive initial load,<br />Cheap toggle      | 조건부 렌더링 중 하나. 요소는 항상 렌더링 되고 DOM에 남아있다.<br />단순히 엘리먼트 display 속성을 토글한다. display: hidden을 통해 안보이게 할 뿐이다.<br />보이지 않을 뿐 전부 렌더링 되기때문에, 딱 한번만 렌더링 되는경우라면 v-if에 비해 상대적으로 렌더링 비용이 높다.<br />하지만, 자주 변경되는 요소라면 토글 비용이 적다. |
+| `v-if`, `v-else-if`, `v-else`<br />Cheap initial load,<br />Expensive toggle | 조건부 렌더링 중 하나. 조건에 따라 요소를 렌더링한다.<br />directive의 표현식이 true일 때만 렌더링한다. (false이면 아예 렌더링 되지 않는다. ) <br />엘리먼트 및 표함된 directive는 토글하는 동안 삭제되고 다시 작성된다. <br />화면에서 보이지 않을 뿐만 아니라 렌더링 자체가 되지 않기 때문에 최초 렌더링 비용이 낮다. <br />하지만 자주 변경되는 요소의 경우 다시 렌더링 해야 하기에 토글 비용이 증가한다. |
+| `v-for`                                                      | 원본 데이터를 기반으로 엘리먼트 또는 템플릿 블록을 여러 번 렌더링 한다. <br />`item in items` 구문을 사용한다. <br />item 위치의 변수를 각 요소에서 사용할 수 있다. 객체의 경우 key이다. <br />`v-for`사용 시 반드시 `key` 속성을 각 요소에 작성해야 한다. <br />`v-if`와 함께 사용하는 경우 `v-for`가 우선 순위가 높다. 하지만 가급적 동시 사용을 하지 않는다. |
+| `v-on`                                                       | 엘리먼트에 이번트 리스너를 연결한다. <br />이벤트 유형은 전달인자로 표시한다. 특정 이벤트가 발생했을 시, 주어진 코드가 실행 된다. <br />약어가 있다. (`v-on:click="function"` => `@click="function"`) |
+| `v-bind`                                                     | HTML 요소의 속성에 Vue의 상태 데이터를 값으로 할당한다. <br />Object 형태로 사용하면 value가 true인 key가 class 바인딩 값으로 할당한다. <br />약어가 있다. ()`v-bind:href` => `:href)` |
+| `v-model`                                                    | HTML form 요소의 값과 data를 양방향 바인딩한다. <br />수식어가 있다. <br />1. `.lazy`: input 대신 change 이벤트 이후에 동기화한다. <br />2. `.number`: 문자열을 숫자로 변경한다. <br />3. `.trim`: 입력에 대한 trim을 진행한다. |
+
+<br>
