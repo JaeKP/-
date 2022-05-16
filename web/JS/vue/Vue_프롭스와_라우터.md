@@ -1,5 +1,7 @@
 # Vue 프롭스와 라우터
 
+[toc]
+
 ## 1. SFC (Single File Component)
 
 - Vue의 컴포넌트 기반 개발의 핵심 특징이다. 
@@ -646,5 +648,9 @@ export default {
   // 쿼리=>  /register?plan=private
   router.push({path: 'register', query:{plan: 'private'}})
   ```
+
+- params가 있을 경우에는 `this.$route.param`로 사용이 가능하다. 
+
+
 
 <br>

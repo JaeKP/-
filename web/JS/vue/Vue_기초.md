@@ -22,7 +22,7 @@ Single Page Application(단일 페이지 애플리케이션): 현재 페이지�
 
   ​	모바일 사용량이 증가하고 있는 현재. 트래픽 감소와 속도, 반응성의 향상은 매우 중요하기 때문이다.
 
-- 동작 원리의 일부가 CSR(Client SIde Rendering)의 구조를 따른다. 
+- 동작 원리의 일부가 CSR(Client Side Rendering)의 구조를 따른다. 
 
 <br>
 
@@ -31,6 +31,7 @@ Single Page Application(단일 페이지 애플리케이션): 현재 페이지�
 - 과거 웹사이트들은 요청에 따라 매번 새로운 페이지를 응답하는 방식이었다. (MPA: Multi Page Application)
 - 스마트폰이 등장하면서 모바일 최적화의 필요성이 대두된다. 
   - 모바일 네이티브 앱과 같은 형태의 웹 페이지가 필요해졌다.
+  - 그 결과, CSR, SPA개념이 등장하게 되었다. 
 - 1개의 웹 페이지에서 여러 동작이 이루어지며 모바일 앱과 비슷한 형태의 사용자 경험을 제공한다.
 
 <br>
@@ -40,7 +41,7 @@ Single Page Application(단일 페이지 애플리케이션): 현재 페이지�
 >  Client Side Rendering
 
 - 서버에서 화면을 구성하는 SSR방식과 달리 클라이언트에서 화면을 구성한다. (즉, 하나의 html과 많~은 JS로 제공한다. )
-- 최초 요청 시 HTML, CSS, JS 등 데이터를 제외한 각종 리소스를 응답받고 이후 클라이언트에서는 필요한 데이터만 요청해 JS만 DOM을 렌더링하는 방식이다.
+- 최초 요청 시 HTML, CSS, JS 등 데이터를 제외한 각종 리소스를 응답받고 이후 클라이언트에서는 필요한 데이터만 요청해 JS로 DOM을 렌더링하는 방식이다.
 - 즉, 처음에 뼈대만 받고 브라우저에서 동적으로 DOM을 그린다. 
 - **SPA가 사용하는 렌더링 방식이다.**
 
@@ -129,7 +130,7 @@ Single Page Application(단일 페이지 애플리케이션): 현재 페이지�
 
 #### (3) ViewModel
 
-- Vue에서 ViewModel은 모든 VueInstance이다.
+- Vue에서 ViewModel은 모든 Vue Instance이다.
 - View와 Model 사이에서 Data와 DOM에 관련된 모든 일을 처리한다.
 - ViewModel을 활용해 Data를 얼마만큼 잘 처리해서 보여줄 것인지(DOM)를 고민하는 것이다.
 
@@ -139,7 +140,7 @@ Single Page Application(단일 페이지 애플리케이션): 현재 페이지�
 
 [공식문서](https://kr.vuejs.org/v2/guide/#Vue-js%EA%B0%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%EC%9A%94)
 
-Data가 변화하면 DOM이 변경된다. Data로직을 작성 => DOM 작성
+Data가 변화하면 DOM이 변경된다. **Data로직을 작성 => DOM 작성**
 
 ```vue
 <!DOCTYPE html>
