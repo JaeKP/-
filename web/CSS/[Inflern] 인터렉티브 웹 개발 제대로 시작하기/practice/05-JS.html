@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Interactive Web</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <style>
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      .characters {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background: #fff000;
+      }
+      .ilbuni {
+        width: 100px;
+        cursor: pointer;
+      }
+      .characters .ilbuni {
+        display: inline-block;
+      }
+      .special {
+        border: 10px dashed red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="characters">
+      <div class="ilbuni a">
+        <img src="images/ilbuni_0.png" alt="일분이" />
+      </div>
+      <div class="ilbuni b">
+        <img src="images/ilbuni_1.png" alt="일분이" />
+      </div>
+      <div class="ilbuni c">
+        <img src="images/ilbuni_2.png" alt="일분이" />
+      </div>
+    </div>
+    <div class="ilbuni d">
+      <img src="images/ilbuni_3.png" alt="일분이" />
+    </div>
+
+    <script>
+      // DOM SCRIPT (Document Object Model)
+      // html element를 객체(object)로 보고 자바스크립트로 제어한다.
+      // 시각적으로 보이는 인터스페이스를 제어하는 것이기 때문에, DOM Script를 제어한다.
+
+      // 전역 변수 사용을 지양해야 한다.
+      (function () {
+        // NodeList를 반환한다. 배열은 아니지만 index가 있다.
+        const ilbuniGroup = document.querySelectorAll(".ilbuni");
+
+        //ilbuniGroup[0]
+        const ilbuniA = document.querySelector(".a");
+
+        //ilbuniGroup[2]
+        const ilbuniB = document.querySelector(".ilbuni:nth-child(3)");
+
+        // 데이터 속성: 데이터 속성은 HTML 요소의 'data-' 로 시작하는 속성으로 특정한 데이터를 DOM 요소에 저장해두기 위해 사용된다.
+        const char = document.querySelector(".characters");
+        char.setAttribute("data-id", 123);
+
+        // 태그 생성, 삭제
+        const pElem = document.createElement("p");
+        pElem.innerText = "안녕?";
+        char.appendChild(pElem);
+        // char.removeChild(document.querySelector(".b"));
+
+        // 클래스 추가, 삭제, 토글
+        ilbuniA.classList.add("special");
+        ilbuniA.classList.remove("special");
+        ilbuniA.classList.toggle("special");
+
+        // 이벤트
+        // addEventListener('DOMVontentLoaded')
+        ilbuniA.addEventListener("click", () => {
+          ilbuniA.classList.toggle("special");
+        });
+
+        // this, event.currentTarget: 이벤트가 바인딩된 객체
+        // event.target: 실제 이벤트가 발생된 객체
+      })();
+    </script>
+  </body>
+</html>

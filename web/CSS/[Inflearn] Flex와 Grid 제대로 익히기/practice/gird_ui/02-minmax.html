@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>CSS Grid</title>
+    <link rel="stylesheet" href="default.css" />
+    <style>
+      /* minmax */
+      .grid-container {
+        display: grid;
+        /* auto-fill: column의 개수를 미리 정하지 않고 설정된 너비가 허용하는 한 최대한 셀을 채운다.
+				media쿼리를 쓰지 않고도 column 갯수가 변하는 반응형 레이아웃을 만들 수도 있다. */
+        /* grid-template-columns: repeat(auto-fill, minmax(200px, auto)); */
+
+        /* auto-fit: auto-fill과 유사하지만 item갯수가 모자라도 남는 공간을 채운다는 차이점이 있다. */
+
+        grid-template-columns: repeat(3, 1fr);
+        /* min(최솟값, 최댓값) */
+        grid-template-rows: repeat(3, minmax(100px, auto));
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="grid-item">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, qui.
+      </div>
+      <div class="grid-item">B</div>
+      <div class="grid-item">C</div>
+      <div class="grid-item">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum commodi,
+        amet eligendi consectetur dolores quae, omnis nulla debitis
+        reprehenderit voluptatum sapiente impedit culpa dolor voluptatem
+        pariatur minima non. Modi cum perferendis enim a iure eos voluptate,
+        maxime voluptatibus dolor voluptatum.
+      </div>
+      <div class="grid-item">E</div>
+      <div class="grid-item">F</div>
+      <div class="grid-item">G</div>
+      <div class="grid-item">H</div>
+      <div class="grid-item">I</div>
+    </div>
+  </body>
+</html>

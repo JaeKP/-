@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    /* 애니메이션이 transition과 다른 점은 키프레임을 추가할 수 있는 것이다. */
+    /* 변화가 있는 지점을 keyFrame이라고 한다. 시작부터 끝날때까지 keyFrame을 줄 수 있다. */
+    @keyframes sample-ani {
+      0% {
+        transform: translate(0, 0);
+      }
+      50% {
+        transform: translate(500px, 0);
+        background-color: crimson;
+      }
+      100% {
+        transform: translate(700px, 500px);
+      }
+    }
+    .box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 100px;
+      border: 2px solid #000;
+      background-color: #fff000;
+      /* animation: 생성한 애니메이션 이름, 재생시간, 가속도, 반복, 디렉션, 필모드, 플레이 스테이트 등 */
+      /* animation: sample-ani 3s linear infinite alternate-reverse; */
+      animation: sample-ani 3s linear forwards;
+    }
+    /* 호버하는 순간 멈춘다. */
+    .box:hover {
+      animation-play-state: paused;
+    }
+  </style>
+  <body>
+    <h1>Animation</h1>
+    <div class="box">BOX</div>
+  </body>
+</html>

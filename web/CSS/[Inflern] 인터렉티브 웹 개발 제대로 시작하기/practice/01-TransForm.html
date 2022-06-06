@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .box-container {
+      display: flex;
+    }
+    .box {
+      width: 100px;
+      height: 100px;
+      border: 2px solid black;
+      background-color: rgba(255, 255, 0, 0.7);
+
+      /* 값(숫자)이 변화 될 때 중간과정을 애니메이션으로 바꿔준다. (auto같은 경우 변경 x)*/
+      /* 꼭 transform에만 적용되는 것이 아니라 width를 바꿀때, font-size변경, background컬러 등 값이 변경될 때 적용되는 것이다. */
+      transition: 1s 2s cubic-bezier(0.25, 0.1, 0.49, 1.73);
+    }
+    /* width를 조절했을 때랑 완전 다른 결과를 보여준다. => 밀리지가 않는다. 다른 박스에 영향을 주지 않는다.*/
+    /* 브라우저가 다시 그려내는 과정에서 해당 요소만 다시 그려 넣기 때문에, 성능이 좋다. (다른 박스는 계산하지 않는다.) */
+    /* scale: 크기 조정, rotate: 회전, skew: 비틀기, translate: 이동 */
+    /* transform-origin: 기준점 변경 */
+    .box:hover {
+      /* transform: scale(2) rotate(15deg); */
+      /* transform: skewY(-30deg); */
+      /* transform: translate(30px, 10px); */
+      /* transform: translateY(-30px); */
+      transform: scale(1.5);
+      /* transform-origin: right bottom; */
+      transform-origin: 50% 100%;
+      background-color: crimson;
+    }
+  </style>
+  <body>
+    <!-- 크기 조정이 자유롭다. -->
+    <!-- 기준점이 좌측상단으로 고정된 것이 아니라, 자유자재로 바꿀 수 있다. -->
+    <!-- 하드웨어 가속을 사용해서 성능이 굉장히 좋다. -->
+    <h1>CSS TransForm</h1>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur quaerat
+      fuga recusandae laboriosam ipsam quidem magni dolore aspernatur nostrum
+      assumenda amet est quia quasi, vero ipsum. Itaque dolorem sit soluta
+      repellendus ex! Vitae ducimus modi dolorum porro, consequuntur obcaecati
+      illum hic repudiandae. Mollitia, id ipsam, tempore doloremque eum saepe
+      blanditiis ad, excepturi nemo optio ipsa architecto voluptatibus soluta
+      quod quam! Commodi quo ratione officia voluptate reiciendis eveniet
+      debitis? Voluptates debitis veritatis voluptas temporibus nulla sit
+      laborum assumenda, numquam quae, consequatur iusto iste repudiandae, quos
+      perferendis consequuntur eos. Iure consectetur voluptate dolore est qui
+      amet, quas ex. Laudantium, error. Blanditiis, inventore.
+    </p>
+    <div class="box-container">
+      <div class="box">A</div>
+      <div class="box">B</div>
+      <div class="box">C</div>
+      <div class="box">D</div>
+      <div class="box">E</div>
+    </div>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur quaerat
+      fuga recusandae laboriosam ipsam quidem magni dolore aspernatur nostrum
+      assumenda amet est quia quasi, vero ipsum. Itaque dolorem sit soluta
+      repellendus ex! Vitae ducimus modi dolorum porro, consequuntur obcaecati
+      illum hic repudiandae. Mollitia, id ipsam, tempore doloremque eum saepe
+      blanditiis ad, excepturi nemo optio ipsa architecto voluptatibus soluta
+      quod quam! Commodi quo ratione officia voluptate reiciendis eveniet
+      debitis? Voluptates debitis veritatis voluptas temporibus nulla sit
+      laborum assumenda, numquam quae, consequatur iusto iste repudiandae, quos
+      perferendis consequuntur eos. Iure consectetur voluptate dolore est qui
+      amet, quas ex. Laudantium, error. Blanditiis, inventore.
+    </p>
+  </body>
+</html>

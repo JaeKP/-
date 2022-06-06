@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .world {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80vw;
+      height: 60vh;
+      background-color: #fff000;
+      /* 원근법 : 얼마나 내 눈에서 멀리있는 시점으로 바라볼 것인가.*/
+      /* 숫자가 작아질 수록 앞에 있기 때문에 좀 더 극적으로 보인다.*/
+      /* 요소의 transform perspective를 줄 수 있지만, 이와 효과가 다르다. (요소들이 모두 똑같이 적용이된다.)   */
+      perspective: 500px;
+    }
+    .card {
+      position: relative;
+      width: 100px;
+      height: 150px;
+      margin: 1em;
+      /* 처음에 브라우저에서 랜더링할때, 0deg로 처리를 해놓으면 움직일 준비를 하기 때문에 변화가 있다면, 변화가 없는 deafault를 설정하는 것이 좋다.  */
+      transform: rotateY(0deg);
+      transition: 1s;
+      transform-origin: left;
+      /* 자식들 또한 3d공간에 배치하기 위함 */
+      /* -webkit-transform-style: preserve-3d; */
+      transform-style: preserve-3d;
+    }
+    .world:hover .card {
+      transform: rotateY(-180deg);
+    }
+    .card-side {
+      /* 문자 중앙 정렬 */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      /* 카드 겹치기 */
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+
+      /* em은 폰트사이즈에 영향을 받겠다는 의미이다. 의도를 알아야 한다. */
+      /* 폰트사이즈를 기준으로 상대적인 비율을 만드는 것들은 em이다.  */
+      border-radius: 0.5em;
+      font-size: 1.5rem;
+
+      /* 뒷면이 안보이게 하는 속성 */
+      backface-visibility: hidden;
+    }
+    .card-side-front {
+      background-color: white;
+    }
+    .card-side-back {
+      background-color: crimson;
+      transform: rotateY(180deg);
+    }
+  </style>
+  <body>
+    <!-- 3D무대가 필요하다. -->
+    <div class="world">
+      <!-- 자식들의 기준점이 되기 위해 position:relative -->
+      <div class="card">
+        <!-- position: absolute로 둘을 포갠다. -->
+        <!-- z-index가 없을 때는 아래에 있는것이 위로 올라오게된다.  -->
+        <!-- 앞면 -->
+        <div class="card-side card-side-front">F</div>
+        <!-- 뒷면 -->
+        <div class="card-side card-side-back">B</div>
+      </div>
+    </div>
+  </body>
+</html>

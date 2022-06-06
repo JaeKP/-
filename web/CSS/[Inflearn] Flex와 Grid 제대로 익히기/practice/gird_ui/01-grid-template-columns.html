@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>CSS Grid</title>
+    <link rel="stylesheet" href="default.css" />
+    <style>
+      .grid-container {
+        display: grid;
+        /* grid-template-columns: 100px 300px 200px; */
+
+        /* fr: fraction (비율), 알아서 늘어난다. */
+        /* grid-template-columns: 1fr 2fr 1fr; */
+
+        /* 양 끝의 column은 늘어나고 가운데는 고정되어 있다.  */
+        /* grid-template-columns: 1fr 500px 1fr; */
+
+        /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
+        /* grid-template-columns: repeat(5, 1fr) */
+        grid-template-columns: repeat(3, 1fr);
+        /* grid-template-columns: repeat(3, 1fr 2fr 1fr); */
+
+        /* grid-template-rows: 200px 200px auto; */
+
+        /* row는 fr을 사용해도 자동으로 늘어나지 않는다.=> 컨테이너 자체가 늘려야 한다. 
+				또한, 그리드 item의 경우 컨테이너 높이가 확보되어있으면 그냥 알아서 늘어난다. */
+        /* grid-template-rows: repeat(2, 1fr); */
+        height: 80vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="grid-item">A</div>
+      <div class="grid-item">B</div>
+      <div class="grid-item">C</div>
+      <div class="grid-item">D</div>
+      <div class="grid-item">E</div>
+      <div class="grid-item">F</div>
+      <div class="grid-item">G</div>
+      <div class="grid-item">H</div>
+      <div class="grid-item">I</div>
+    </div>
+  </body>
+</html>

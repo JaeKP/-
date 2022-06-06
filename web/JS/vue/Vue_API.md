@@ -22,3 +22,25 @@
 
 <br>
 
+## 2. CORS
+
+> Same-origin policy (SOP)
+>
+> "동일 출처 정책"
+>
+> - 특정 출처에서 불러온 문서나 스크립트가 다른 출처에서 가져온 리소스와 상호작용 하는 것을 제한하는 보안 방식
+>
+> - 잠재적으로 해로울 수 있는 문서를 분리함으로써 공격받을 수 있는 경로를 줄임
+
+
+
+## 3. Authentication & Authorization
+
+
+
+
+
+
+
+## 4. DRF Authentication
+
