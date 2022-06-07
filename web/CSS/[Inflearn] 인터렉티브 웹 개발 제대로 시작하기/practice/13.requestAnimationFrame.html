@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .btn {
+      font-size: 2rem;
+    }
+  </style>
+  <body>
+    <button class="btn">취소</button>
+    <script>
+      let timeId;
+      let n = 0;
+      const btn = document.querySelector(".btn");
+
+      function sample() {
+        n++;
+        console.log(n);
+
+        // return 하면 requestAnimationFrame을 실행하지 않기 때문에 반복을 종료한다.
+        if (n > 200) {
+          return;
+        }
+
+        // 초당 60번 반복을 목표로 빠르게 반복한다.
+        timeId = requestAnimationFrame(sample);
+      }
+
+      sample();
+
+      // cancleAnimationFrame:
+      btn.addEventListener("click", function () {
+        cancelAnimationFrame(timeId);
+      });
+    </script>
+  </body>
+</html>

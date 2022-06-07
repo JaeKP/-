@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .ball {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 30px;
+        height: 30px;
+        /* margin: -15px 0 0 -15px; */
+        border-radius: 50%;
+        background-color: crimson;
+        transition: 1s;
+      }
+      .ball.end {
+        background: dodgerblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ball"></div>
+    <script>
+      const ballElem = document.querySelector(".ball");
+      // mouse event의 event.clientX, event.clientY는 발생한 좌표를 의미한다.(브라우저 창 왼쪽 꼭대기 기준 좌표)
+      window.addEventListener("click", function (event) {
+        console.log(event.clientX, event.clientY);
+        ballElem.style.transform = `translate(
+          ${event.clientX - 15}px, ${event.clientY - 15}px
+          )`;
+      });
+
+      // transitionstart: transition이 시작하면 발생하는 이벤트
+      // transitionend: transition이 끝나면 발생하는 이벤트
+      ballElem.addEventListener("transitionend", function (event) {
+        ballElem.classList.add("end");
+
+        // transitionEvent.elapsedTime: transition duration타임
+        console.log(event.elapsedTime);
+
+        // transitionEvent.propertyName: transition 전환과 관련한 css 속성의 이름
+        console.log(event.propertyName);
+      });
+    </script>
+  </body>
+</html>

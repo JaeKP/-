@@ -1,5 +1,7 @@
 # 인터렉티브 웹 개발 시작하기
 
+[toc]
+
 ## 1. Transform 
 
 - 기준점을 자유자재로 바꿀 수 있다.
@@ -134,8 +136,8 @@
 ## 3. 3D
 
 - `perspective`: 원근법을 주는 속성 
-  - 일반적으로 컨테이너에 주는 속성 (3d 무대)
-  - 요소에 `tranform: perspective`를 줄 수 있지만, 컨테이너에 주는 것과 효과가 다르다. 
+  - 일반적으로 컨테이너에 주는 속성 (3d 무대) => 시점에 따라 요소에 대한 효과가 조금 다르게 보인다.
+  - 요소에 `tranform: perspective`를 줄 수 있다. => 요소마다 똑같이 효과가 적용된다.  
 - `transform-style: preserve-3d`: 자식들 또한 3d공간에 배치하기 위한 속성
 
 <br>
@@ -166,3 +168,372 @@ DOM SCRIPT (Document Object Model)
 })();
 ```
 
+<br>
+
+### 2) 이벤트 핸들러
+
+- 하나의 이벤트 핸들러에 모든 것을 다 처리 하는 것은 좋지 않다. 
+- 구체적인 기능은 따로 함수를 만들고 이벤트 핸들러에서는 해당 함수를 호출해서 사용한다. 
+
+```html
+<script>
+    // 여러개 중 하나만 활성화 하기 패턴.
+    (function () {
+    const stageElem = document.querySelector(".stage");
+
+    //현재 활성화된 아이템을 저장하는 변수
+    // const currentItem = document.querySelector(".door-opened");
+    let currentItem = null;
+
+    // 클릭한게 문이면, 문 열기
+    function activate(elem) {
+        elem.classList.add("door-opened");
+        currentItem = elem;
+    }
+
+    // 열려있는 문이 있으면, 닫기
+    function inactivate(elem) {
+        elem.classList.remove("door-opened");
+    }
+
+    function doorHandler(event) {
+        const targetElem = event.target;
+        if (currentItem) {
+            inactivate(currentItem);
+        }
+        if (targetElem.classList.contains("door-body")) {
+            activate(targetElem.parentNode);
+        }
+    }
+    stageElem.addEventListener("click", doorHandler);
+})();
+</script>
+```
+
+<br>
+
+### 3) 객체
+
+```javascript
+// 생성자 (constructor)함수
+function Person(nickname, age){
+    this.nickname = nickname;
+    this.age = age;
+}
+
+// 공통 메서드 생성
+// 메모리 효율이 더 좋다. 
+// 객체마다 똑같이 공유하는 메서드나 속성은 prototype 객체에 정리를 하면 된다. 
+Person.prototype.introduce = function(){
+    console.log(`안녕하세요? 저는 ${this.nickname}입니다.`)
+}
+
+// 인스턴스 (instance) 생성
+const person1 = new Person('일분이', 10);
+const person2 = new Person('이분이', 8);
+```
+
+<br>
+
+- 객체를 html로 반영하기
+
+```javascript
+function Card(num, color) {
+    this.num = num;
+    this.color = color;
+    this.init();
+}
+
+// 아예 prototype 객체를 다시 만들 때는 constructor 속성을 넣어주어야 한다.
+Card.prototype = {
+    constructor: Card,
+    init: function () {
+        const mainElem = document.createElement("div");
+        mainElem.style.color = this.color;
+        mainElem.innerText = this.num;
+        mainElem.classList.add("card");
+        document.body.appendChild(mainElem);
+    },
+};
+
+const card1 = new Card(1, "green");
+const card2 = new Card(7, "blue");
+```
+
+<br>
+
+| ![image-20220607181737109](https://raw.githubusercontent.com/JaeKP/image_repo/main/img/image-20220607181737109.png) | ![image-20220607181635958](https://raw.githubusercontent.com/JaeKP/image_repo/main/img/image-20220607181635958.png) |
+| :----------------------------------------------------------: | :----------------------------------------------------------: |
+
+<br>
+
+### 4) 스크롤 이벤트
+
+```html
+<script>
+  (function () {
+    const outputElem = document.querySelector(".output");
+    const ilbuniElem = document.querySelector(".ilbuni");
+    function showValue() {
+      // window.pageYOffset: 스크롤을 얼마나 했는지 px로 나타내는 속성이다.
+      // offsetTop: 요소의 처음 위치를 가져온다. => 고정된 값
+      // window.innerHeight: 현재 브라우저의 높이
+      // getBoundingClientRect(): 요소의 크기와 위치에 대한 정보를 갖고 있는 객체를 반환하는 메서드이다.
+      let posY = ilbuniElem.getBoundingClientRect().top;
+      outputElem.innerText = posY;
+
+      if (posY < window.innerHeight * 0.2) {
+        ilbuniElem.classList.add("zoom");
+      } else {
+        ilbuniElem.classList.remove("zoom");
+      }
+    }
+
+    window.addEventListener("scroll", function () {
+      showValue();
+    });
+  })();
+</script>
+```
+
+- `getBoundingClientRect()`
+	| ![image-20220607185243300](https://raw.githubusercontent.com/JaeKP/image_repo/main/img/image-20220607185243300.png) |
+  | ------------------------------------------------------------ |
+
+
+
+<br>
+
+### 5) transition 이벤트 
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .ball {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 30px;
+        height: 30px;
+        /* margin: -15px 0 0 -15px; */
+        border-radius: 50%;
+        background-color: crimson;
+        transition: 1s;
+      }
+      .ball.end {
+        background: dodgerblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ball"></div>
+    <script>
+      const ballElem = document.querySelector(".ball");
+      // mouse event의 event.clientX, event.clientY는 발생한 좌표를 의미한다.(브라우저 창 왼쪽 꼭대기 기준 좌표)
+      window.addEventListener("click", function (event) {
+        console.log(event.clientX, event.clientY);
+        ballElem.style.transform = `translate(
+          ${event.clientX - 15}px, ${event.clientY - 15}px
+          )`;
+      });
+
+      // transitionstart: transition이 시작하면 발생하는 이벤트
+      // transitionend: transition이 끝나면 발생하는 이벤트
+      ballElem.addEventListener("transitionend", function (event) {
+        ballElem.classList.add("end");
+
+        // transitionEvent.elapsedTime: transition duration타임
+        console.log(event.elapsedTime);
+
+        // transitionEvent.propertyName: transition 전환과 관련한 css 속성의 이름
+        console.log(event.propertyName);
+      });
+    </script>
+  </body>
+</html>
+
+```
+
+- 마우스 클릭한 좌표로 공이 이동하지 않는 이유
+
+  - 바디자체에 마진이 있어서 
+
+    => 바디 마진을 제거한다. 
+
+    => ball 속성을 `position: absolute`, `top: 0` , `left:0`으로 수정한다.
+
+  - 클릭한 곳이 중간이 되도록 이동하지 않는다. (클릭한 곳이 왼쪽 상단이 되도록 이동함)  
+
+    => 볼 자체에 너비와 높이만큼 마이너스 마진을 준다 
+
+    => 이동할때 볼 너비와 높이만큼 마이너스하여 이동한다.
+
+- transitionEvent
+
+  | ![image-20220607190839783](https://raw.githubusercontent.com/JaeKP/image_repo/main/img/image-20220607190839783.png) | ![image-20220607190915101](https://raw.githubusercontent.com/JaeKP/image_repo/main/img/image-20220607190915101.png) |
+  | ------------------------------------------------------------ | ------------------------------------------------------------ |
+
+<br>
+
+### 6) 애니메이션 이벤트
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @keyframes ball-ani {
+        from {
+          transform: translate(0, 0);
+        }
+        to {
+          transform: translate(200px, 200px);
+        }
+      }
+      .ball {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: crimson;
+        /* animation: ball-ani 1s 3 alternate forwards; */
+      }
+      .ball.end {
+        border: 5px solid dodgerblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ball"></div>
+    <script>
+      const ballElem = document.querySelector(".ball");
+      ballElem.addEventListener("click", function () {
+        ballElem.style.animation = "ball-ani 1s 3 alternate forwards";
+      });
+
+      // animationstart: 애니메이션이시작할때 발생하는 이벤트
+      // animationend: 애니메이션이 끝날 때 발생하는 이벤트
+      ballElem.addEventListener("animationend", function (event) {
+        ballElem.classList.add("end");
+        console.log(event);
+      });
+
+      // animationiteration: 애니메이션이 반복이 될 때 발생하는 이벤트 (처음에는 x)
+      ballElem.addEventListener("animationiteration", function (event) {
+        console.log(event);
+      });
+    </script>
+  </body>
+</html>
+
+```
+
+- animationEvent
+
+  | ![image-20220607192205008](https://raw.githubusercontent.com/JaeKP/image_repo/main/img/image-20220607192205008.png) | ![image-20220607192232316](https://raw.githubusercontent.com/JaeKP/image_repo/main/img/image-20220607192232316.png) |
+  | ------------------------------------------------------------ | ------------------------------------------------------------ |
+
+<br>
+
+### 7) 타이밍
+
+#### (1) setTimeout
+
+```javascript
+// 첫 번째 매개변수: 함수, 두 번째 매개변수: 시간(ms)
+setTimeout(function(){
+    console.log('setTimeout!')
+}, 1000)
+```
+
+- 1000ms 즉, 1초 후에 이 함수가 실행된다. 
+- 내가 원하는 시간만큼 지연시킬 때, 사용한다.
+
+<br>
+
+```javascript
+let timeId;
+
+function sample(){
+    console.log('sample!');
+}
+
+// setTimeout은 숫자를 반환한다.처음에는 1을 반환하며 반복하여 실행할 수록 숫자가 1증가한다. 
+timeId = setTimeout(sample, 3000);
+console.log(timeid)
+
+// clearTimeout으로 취소할 수 있다. 
+// 3초가 되기 전(setTimeout이 실행되기 전)에 clear를 함으로 setTimeout이 취소된다. 
+clearTimeout(timeId);
+```
+
+<br>
+
+#### (2) setInterval
+
+```javascript
+let timeId;
+const btn = document.querySelector(".btn");
+function sample(){
+    console.log('sample!');
+}
+
+// 첫번째 매개변수: 함수, 두 번째 매개변수: 시간 (ms)
+timeId = setInterval(sample, 1000);
+
+// clearInterval로 취소할 수 있다. 
+btn.addEventListener("click", function(){
+    clearInterval(timeId)
+});
+```
+
+- 1000ms에 한번 씩 함수를 실행한다. 
+
+<br>
+
+#### (3) requestAnimationFrame
+
+- setInterval의 단점을 개선!
+- [공식문서](https://developer.mozilla.org/ko/docs/Web/API/Window/requestAnimationFrame)
+
+```html
+<script>
+  let timeId;
+  let n = 0;
+  const btn = document.querySelector(".btn");
+
+  function sample() {
+    n++;
+    console.log(n);
+
+    // return 하면 requestAnimationFrame을 실행하지 않기 때문에 반복을 종료한다.
+    if (n > 200) {
+      return;
+    }
+
+    // 초당 60번 반복을 목표로 빠르게 반복한다.
+    timeId = requestAnimationFrame(sample);
+  }
+
+  sample();
+
+  // cancleAnimationFrame:
+  btn.addEventListener("click", function () {
+    cancelAnimationFrame(timeId);
+  });
+</script>
+```
+
+<br>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <title>Document</title>
+    <style>
+      .stage {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+        background-color: #333;
+      }
+      .door {
+        position: relative;
+        width: 100px;
+        height: 150px;
+      }
+      .door-back {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        /* 넘어간 일분이가 보이지 않는다. */
+        overflow: hidden;
+      }
+      .ilbuni {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100px;
+        height: 100px;
+        background-repeat: no-repeat;
+        background-position: 50% 100%;
+        background-size: contain;
+        /* transform에서 3d가 붙은 속성은 하드웨어 가속을 사용하기 때문에 퍼포먼스 향상에 좋다. 
+        그래서 x축만 이동하더라도 3d를 활용한다.*/
+        /* translate의 100%는 해당요소의 크기에 따른 비율이다. */
+        transform: translate3d(100%, 0, 0);
+        transition: 0.5s 0.5s;
+      }
+      .door:nth-child(1) .ilbuni {
+        background-image: url("images//ilbuni_0.png");
+      }
+      .door:nth-child(2) .ilbuni {
+        background-image: url("images//ilbuni_1.png");
+      }
+      .door:nth-child(3) .ilbuni {
+        background-image: url("images//ilbuni_2.png");
+      }
+      .door-body {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        transition: 0.5s;
+        transform-origin: left;
+      }
+      .door:nth-child(1) .door-body {
+        background-color: rgba(255, 0, 0, 0.7);
+      }
+      .door:nth-child(2) .door-body {
+        background-color: rgba(0, 255, 0, 0.7);
+      }
+      .door:nth-child(3) .door-body {
+        background-color: rgba(0, 0, 255, 0.7);
+      }
+      .door-opened .door-body {
+        transform: perspective(800px) rotateY(-110deg);
+      }
+      .door-opened .ilbuni {
+        transform: translate3d(0, 0, 0);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stage">
+      <div class="door">
+        <div class="door-back"><div class="ilbuni"></div></div>
+        <div class="door-body"></div>
+      </div>
+      <div class="door">
+        <div class="door-back"><div class="ilbuni"></div></div>
+        <div class="door-body"></div>
+      </div>
+      <div class="door">
+        <div class="door-back"><div class="ilbuni"></div></div>
+        <div class="door-body"></div>
+      </div>
+    </div>
+    <script>
+      // 여러개 중 하나만 활성화 하기 패턴.
+      (function () {
+        const stageElem = document.querySelector(".stage");
+
+        //현재 활성화된 아이템을 저장하는 변수
+        // const currentItem = document.querySelector(".door-opened");
+        let currentItem = null;
+
+        // 클릭한게 문이면, 문 열기
+        function activate(elem) {
+          elem.classList.add("door-opened");
+          currentItem = elem;
+        }
+
+        // 열려있는 문이 있으면, 닫기
+        function inactivate(elem) {
+          elem.classList.remove("door-opened");
+        }
+
+        function doorHandler(event) {
+          const targetElem = event.target;
+          if (currentItem) {
+            inactivate(currentItem);
+          }
+          if (targetElem.classList.contains("door-body")) {
+            activate(targetElem.parentNode);
+          }
+        }
+        stageElem.addEventListener("click", doorHandler);
+      })();
+    </script>
+  </body>
+</html>

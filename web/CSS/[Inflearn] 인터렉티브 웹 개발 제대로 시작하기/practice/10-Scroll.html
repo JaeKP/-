@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <title>Document</title>
+  </head>
+  <style>
+    img {
+      max-width: 100%;
+    }
+    .content {
+      height: 1000vh;
+      padding: 20%;
+      background-color: yellowgreen;
+    }
+    .output {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      font-size: 2rem;
+      font-weight: 200;
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    .ilbuni {
+      width: 100px;
+      margin: 20px auto;
+      transition: 1s;
+    }
+    .ilbuni.zoom {
+      transform: scale(2);
+    }
+  </style>
+  <body>
+    <div class="output">output</div>
+    <div class="content">
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem illo
+        corrupti sapiente ullam. Delectus quae commodi id eveniet placeat. Id
+        assumenda quibusdam debitis nobis eveniet illum iure asperiores aliquid
+        libero, labore, excepturi aliquam temporibus facilis reiciendis repellat
+        inventore ex totam aspernatur unde natus provident! Nobis expedita
+        libero sit corrupti. Totam, ut? Magnam similique tempore deserunt quam
+        eum culpa ullam reprehenderit unde reiciendis odio aliquid vel ipsa in
+        fuga modi, blanditiis odit sapiente est nostrum dolore illum tenetur?
+        Excepturi voluptatibus eos culpa quam facilis porro velit, a dolorem,
+        necessitatibus eaque iste! Dolorem maxime vero harum ut. Nam soluta
+        libero laborum itaque.
+      </p>
+      <figure class="ilbuni">
+        <img src="images/ilbuni_0.png" alt="일분이" />
+      </figure>
+    </div>
+    <script>
+      (function () {
+        const outputElem = document.querySelector(".output");
+        const ilbuniElem = document.querySelector(".ilbuni");
+        function showValue() {
+          // window.pageYOffset: 스크롤을 얼마나 했는지 px로 나타내는 속성이다.
+          // offsetTop: 요소의 처음 위치를 가져온다. => 고정된 값
+          // window.innerHeight: 현재 브라우저의 높이
+          // getBoundingClientRect(): 요소의 크기와 위치에 대한 정보를 갖고 있는 객체를 반환하는 메서드이다.
+          let posY = ilbuniElem.getBoundingClientRect().top;
+          outputElem.innerText = posY;
+
+          if (posY < window.innerHeight * 0.2) {
+            ilbuniElem.classList.add("zoom");
+          } else {
+            ilbuniElem.classList.remove("zoom");
+          }
+        }
+
+        window.addEventListener("scroll", function () {
+          showValue();
+        });
+      })();
+    </script>
+  </body>
+</html>
