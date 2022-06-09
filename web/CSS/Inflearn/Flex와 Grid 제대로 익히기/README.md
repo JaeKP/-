@@ -1,6 +1,6 @@
 # CSS Flex와 Grid 제대로 익히기
 
-- 인프런의 `Flex와 Grid 제대로 익히기` 강의를 수강하면서 진행했던 자료들입니다.
+- 인프런의 `Flex와 Grid 제대로 익히기` 강의를 수강하면서 학습한 과정을 기록하는 공간입니다. 
 - [Flex 교재](https://studiomeal.com/archives/197)
 - [Grid 교재](https://studiomeal.com/archives/533)
 

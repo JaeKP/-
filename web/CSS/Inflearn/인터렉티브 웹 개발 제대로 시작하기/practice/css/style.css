@@ -1,0 +1,445 @@
+@keyframes ani-head {
+  to {
+    transform: rotateX(-10deg);
+  }
+}
+
+@keyframes ani-running-leg {
+  from {
+    transform: rotateX(-30deg)
+  }
+  to {
+    transform: rotateX(30deg);
+  }
+}
+
+@keyframes ani-running-arm {
+  form {
+    transform: rotateY(30deg);
+  }
+  to {
+    transform: rotateY(-30deg);
+  }
+
+}
+
+/* reset */
+body {
+  height: 500vw;
+  font-family: "Apple SD Gothic Neo", "Roboto", "Noto Sans KR", NanumGothic,
+    "Malgun Gothic", sans-serif;
+  -webkit-overflow-scrolling: touch;
+  color: #555;
+  background: #fff000;
+  transition: 0.5s;
+}
+
+.world {
+  /* 월드 자체는 고정되어있고 앞뒤로 움직인다. */
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  perspective: 1000px;
+}
+
+.stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  transform-style: preserve-3d;
+}
+
+/* 꽉찬 상태를 default크기로 잡고 z-index를 활용한다. */
+.house {
+  width: 100vw;
+  height: 100vh;
+  transform-style: preserve-3d;
+
+  /* 줌 아웃 */
+  transform: translateZ(-490vw);
+}
+
+.wall {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.wall-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.wall-title {
+  font-size: 5rem;
+}
+
+/* 왼쪽 벽 오른쪽 벽 돌려주기 */
+.wall-left {
+  /* 가운데를 축으로 돌기 때문에 그만큼 이동시켜주어야 한다.  */
+  width: 1000vw;
+  transform: rotateY(90deg) translateZ(-500vw);
+  background-color: #f8f8f8;
+}
+
+.wall-right {
+  width: 1000vw;
+  transform: rotateY(90deg) translateZ(-400vw);
+  background-color: #f8f8f8;
+}
+
+/* 콘텐츠 벽 배치하기 */
+.wall-front-a {
+  transform: translateZ(300vw);
+}
+
+.wall-front-b {
+  transform: translateZ(50vw);
+}
+.wall-front-c {
+  transform: translateZ(-200vw);
+}
+.wall-front-d {
+  transform: translateZ(-500vw);
+}
+
+/* 프로그레스바 */
+.progress-bar-con {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 5px;
+  background-color: #555;
+  z-index: 100;
+}
+
+.progress-bar {
+  width: 0;
+  height: 100%;
+  background-color: #00a8ff;
+}
+
+/* character */
+.character {
+  position: absolute;
+  left: 12%;
+  bottom: 5%;
+
+  /* 일분이 찐 비율 */
+  /* 일분이의 크기는 같은 비율이여야 하니까 둘다 vw기준으로.. => 가로 세로 비율이 같아야 하기 때문!*/
+  width: 10vw;
+  height: 15.58vw;
+  transform-style: preserve-3d;
+}
+
+/* css로 미리 방향을 정의해 놓는다. */
+.character[data-direction="forward"] {
+  transform: rotateY(180deg);
+}
+
+.character[data-direction="backward"] {
+  transform: rotateY(0deg);
+}
+
+.character[data-direction="left"] {
+  transform: rotateY(-90deg);
+}
+
+.character[data-direction="right"] {
+  transform: rotateY(90deg);
+}
+
+.character-face-con {
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: 1s;
+}
+
+.character-face {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: cover;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.character-face.face-back {
+  transform: rotateY(180deg);
+}
+
+.character-head {
+  /* 
+  이동시켜할 거리/ 전체 거리 => 비율로 위치를 조정 
+  해당 요소의 길이 / 전체 길이 => 비율로 너비, 높이를 조정 
+  */
+
+  left: calc(42 / 856 * 100%);
+  top: 0;
+  z-index: 60;
+  width: calc(770 / 856 * 100%);
+  height: calc(648 / 1334 * 100%);
+  transform-origin: center bottom;
+  animation: ani-head 0.6s infinite alternate
+    cubic-bezier(0.46, 0.18, 0.66, 0.93);
+}
+
+.character-head-face.face-front {
+  background-image: url("../images/ilbuni_head_front.png");
+}
+
+.character-head-face.face-back {
+  background-image: url("../images/ilbuni_head_back.png");
+}
+
+.character-torso {
+  left: calc(208 / 856 * 100%);
+  top: calc(647 / 1334 * 100%);
+  z-index: 50;
+  width: calc(428 / 856 * 100%);
+  height: calc(385 / 1334 * 100%);
+  transform-origin: center center;
+}
+
+.character-torso-face.face-front {
+  background-image: url("../images/ilbuni_body_front.png");
+}
+
+.character-torso-face.face-back {
+  background-image: url("../images/ilbuni_body_back.png");
+}
+
+.character-arm-right {
+  left: 0;
+  top: calc(648 / 1334 * 100%);
+  width: calc(244 / 856 * 100%);
+  height: calc(307 / 1334 * 100%);
+  transform-origin: right top;
+}
+
+.character-arm-right .face-front {
+  background-image: url("../images/ilbuni_arm_0.png");
+}
+
+.character-arm-right .face-back {
+  background-image: url("../images/ilbuni_arm_1.png");
+}
+
+.character-arm-left {
+  left: calc(600 / 856 * 100%);
+  top: calc(648 / 1334 * 100%);
+  width: calc(244 / 856 * 100%);
+  height: calc(307 / 1334 * 100%);
+  transform-origin: left top;
+}
+
+.character-arm-left .face-front {
+  background-image: url("../images/ilbuni_arm_1.png");
+}
+
+.character-arm-left .face-back {
+  background-image: url("../images/ilbuni_arm_0.png");
+}
+
+.character-leg-right {
+  left: calc(200 / 856 * 100%);
+  top: calc(1031 / 1334 * 100%);
+  width: calc(230 / 856 * 100%);
+  height: calc(300 / 1334 * 100%);
+  transform-origin: center top;
+}
+
+.character-leg-right .face-front {
+  background-image: url("../images/ilbuni_leg_0.png");
+}
+
+.character-leg-right .face-back {
+  background-image: url("../images/ilbuni_leg_1.png");
+}
+
+.character-leg-left {
+  left: calc(414 / 856 * 100%);
+  top: calc(1031 / 1334 * 100%);
+  width: calc(230 / 856 * 100%);
+  height: calc(300 / 1334 * 100%);
+  transform-origin: center top;
+}
+
+.character-leg-left .face-front {
+  background-image: url("../images/ilbuni_leg_1.png");
+}
+
+.character-leg-left .face-back {
+  background-image: url("../images/ilbuni_leg_0.png");
+}
+
+.character.running .character-leg-right {
+  animation: ani-running-leg 0.2s alternate infinite linear;
+}
+
+.character.running .character-leg-left {
+  animation: ani-running-leg 0.2s alternate-reverse infinite linear;
+}
+
+.character.running .character-arm {
+  animation: ani-running-arm 0.2s alternate infinite linear;
+}
+
+body[data-char="ragirl"] {
+  background-color: #ff7200;
+}
+
+body[data-char="ragirl"] .character {
+  width: 12vw;
+  height: calc(12vw * 1.4135);
+}
+
+body[data-char="ragirl"] .character-head {
+  left: calc(23 / 948 * 100%);
+  width: calc(920 / 948 * 100%);
+  height: calc(750 / 1340 * 100%);
+}
+
+body[data-char="ragirl"] .character-head-face.face-front {
+  background-image: url("../images/ragirl_head_front.png");
+}
+
+body[data-char="ragirl"] .character-head-face.face-back {
+  background-image: url("../images/ragirl_head_back.png");
+}
+
+body[data-char="ragirl"] .character-torso {
+  left: calc(273 / 948 * 100%);
+  top: calc(630 / 1340 * 100%);
+  z-index: 50;
+  width: calc(402 / 948 * 100%);
+  height: calc(444 / 1340 * 100%);
+  transform-origin: center center;
+}
+
+body[data-char="ragirl"] .character-torso-face.face-front {
+  background-image: url("../images/ragirl_body_front.png");
+}
+
+body[data-char="ragirl"] .character-torso-face.face-back {
+  background-image: url("../images/ragirl_body_back.png");
+}
+
+body[data-char="ragirl"] .character-arm-right {
+  left: calc(134 / 948 * 100%);
+  top: calc(709 / 1340 * 100%);
+  width: calc(138 / 948 * 100%);
+  height: calc(300 / 1340 * 100%);
+  transform-origin: right top;
+}
+
+body[data-char="ragirl"] .character-arm-right .face-front {
+  background-image: url("../images/ragirl_arm_0_front.png");
+}
+
+body[data-char="ragirl"] .character-arm-right .face-back {
+  background-image: url("../images/ragirl_arm_1_back.png");
+}
+
+body[data-char="ragirl"] .character-arm-left {
+  left: calc(675 / 948 * 100%);
+  top: calc(709 / 1340 * 100%);
+  width: calc(138 / 948 * 100%);
+  height: calc(300 / 1340 * 100%);
+  transform-origin: left top;
+}
+
+body[data-char="ragirl"] .character-arm-left .face-front {
+  background-image: url("../images/ragirl_arm_1_front.png");
+}
+
+body[data-char="ragirl"] .character-arm-left .face-back {
+  background-image: url("../images/ragirl_arm_0_back.png");
+}
+
+body[data-char="ragirl"] .character-leg-right {
+  left: calc(290 / 948 * 100%);
+  top: calc(1075 / 1340 * 100%);
+  width: calc(186 / 948 * 100%);
+  height: calc(264 / 1340 * 100%);
+  transform-origin: center top;
+}
+
+body[data-char="ragirl"] .character-leg-right .face-front {
+  background-image: url("../images/ragirl_leg_0.png");
+}
+
+body[data-char="ragirl"] .character-leg-right .face-back {
+  background-image: url("../images/ragirl_leg_1.png");
+}
+
+body[data-char="ragirl"] .character-leg-left {
+  left: calc(474 / 948 * 100%);
+  top: calc(1075 / 1340 * 100%);
+  width: calc(186 / 948 * 100%);
+  height: calc(264 / 1340 * 100%);
+  transform-origin: center top;
+}
+
+body[data-char="ragirl"] .character-leg-left .face-front {
+  background-image: url("../images/ragirl_leg_1.png");
+}
+
+body[data-char="ragirl"] .character-leg-left .face-back {
+  background-image: url("../images/ragirl_leg_0.png");
+}
+
+/* character button */
+.select-character {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  z-index: 100;
+}
+
+.select-character-btn {
+  width: 40px;
+  height: 40px;
+  margin-left: 5px;
+  border: 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.select-character-btn-ilbuni {
+  background-image: url("../images/ilbuni_head_front.png");
+  background-size: 36px auto;
+}
+
+.select-character-btn-ragirl {
+  background-image: url("../images/ragirl_head_front.png");
+  opacity: 0.5;
+}
+
+body[data-char="ragirl"] .select-character-btn-ilbuni {
+  opacity: 0.5;
+}
+
+body[data-char="ilbuni"] .select-character-btn-ilbuni,
+body[data-char="ragirl"] .select-character-btn-ragirl {
+  opacity: 1;
+}

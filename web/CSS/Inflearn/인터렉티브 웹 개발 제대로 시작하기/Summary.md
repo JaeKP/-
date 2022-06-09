@@ -537,3 +537,20 @@ btn.addEventListener("click", function(){
 ```
 
 <br>
+
+| 이벤트 종류 | 사용 속성                                                    | 설명                                                |
+| ----------- | ------------------------------------------------------------ | --------------------------------------------------- |
+| mouse       | `event.clientX`                                              | 이벤트가 발생한 x좌표 (좌측 상단이 0)               |
+|             | `event.clientY                                               | 이벤트가 발생한 Y좌표 (좌측 상단이0)                |
+|             | `mousePos.x = -1 + (clientX / window.innerHeight) * 2`       | 이벤트가 발생한 x좌표 (가운데가 0이 되도록 재계산)  |
+|             | `mousePos.y = 1 - (clientY / window.innerHeight) * 2         | 이벤트가 발생한 Y좌표 (가운데가 0이 되도록 재계산)  |
+|             |                                                              |                                                     |
+| scroll      | `window.pageYoffset`                                         | 스크롤을 얼마나 했는가                              |
+|             | `element.offsetTop`                                          | element의 처음 위치=> 고정된 값                     |
+|             | `window.innerHeight`                                         | 현재 브라우저의 높이                                |
+|             | `element.getBoundingClientRect()`                            | element의 크기와 위치에 대한 객체를 반환하는 메서드 |
+|             | `maxScrollValue = document.body.offsetHeight - window.innerHeight;` | 실제 스크롤 영역                                    |
+|             | `scrollPer = pageYOffset / maxScrollValue;`                  | 스크롤을 한 비율                                    |
+|             |                                                              |                                                     |
+| keydown     | `event.keyCode`                                              | 어떤 버튼을 눌렀는지 번호를 통해 알 수 있다.        |
+
