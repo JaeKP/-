@@ -30,7 +30,7 @@
   // 마우스의 움직임에 따라 시야가 움직인다. (stage를 회전)
   window.addEventListener("mousemove", function ({ clientX, clientY }) {
     // 왼쪽 상단이 0, 0이 아닌 중간이 0, 0이 되도록 값을 재계산한다.
-    mousePos.x = -1 + (clientX / window.innerHeight) * 2;
+    mousePos.x = -1 + (clientX / window.innerWidth) * 2;
     mousePos.y = 1 - (clientY / window.innerHeight) * 2;
     stageElem.style.transform = `rotateX(${mousePos.y*5}deg) rotateY(${mousePos.x*5}deg)`;
   });
