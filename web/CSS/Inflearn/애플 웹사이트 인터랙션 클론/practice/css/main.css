@@ -26,11 +26,19 @@ a {
 }
 
 .global-nav {
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
   height: 44px;
   padding: 0 1rem;
 }
 
 .local-nav {
+  position: absolute;
+  top: 45px;
+  left:0;
+  width: 100%;
   height: 52px;
   border-bottom: 1px solid #ddd;
   padding: 0 1rem;
@@ -67,6 +75,7 @@ a {
 
 .scroll-section{
   padding-top: 50vh;
+  border: 1px solid crimson;
 }
 
 /* #scroll-section-0 */
@@ -81,6 +90,8 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0;
+  top: 35vh;
 }
 
 .main-message p {
@@ -121,6 +132,16 @@ a {
   font-weight: bold;
 }
 
+#scroll-section-2 .b {
+  top: 10%;
+  left: 40%; 
+}
+
+#scroll-section-2 .c {
+  top: 15%;
+  left: 45%; 
+}
+
 .pin {
   width: 1px;
   height: 100px;
@@ -159,6 +180,25 @@ a {
 }
 
 
+/* 위치가 고정된 요소의 처리 
+기본적으로 안보인다. */
+.sticky-elem {
+  display: none;
+  position: fixed;
+  /* top:0; */
+  left:0;
+  width:100%;
+}
+
+/* 스크롤 깊이에 따라 바디에 id값이 부여된다. 해당 영역의 고정된 요소만 보이게된다.*/
+body#show-scene-0 #scroll-section-0 .sticky-elem,
+body#show-scene-1 #scroll-section-1 .sticky-elem,
+body#show-scene-2 #scroll-section-2 .sticky-elem,
+body#show-scene-3 #scroll-section-3 .sticky-elem {
+  display: block;
+}
+
+
 /* pc버전 */
 @media (min-width: 1024px) {
   #scroll-section-0 h1 {
@@ -188,6 +228,14 @@ a {
     width: 20%;
   }
 
+  #scroll-section-2 .b {
+    top: 20%;
+    left: 53%; 
+  }
+  
+  #scroll-section-2 .c {
+    left: 55%; 
+  }
   .mid-message {
     font-size: 4vw;
   }
