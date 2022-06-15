@@ -32,6 +32,7 @@ a {
   width: 100%;
   height: 44px;
   padding: 0 1rem;
+  z-index: 10;
 }
 
 .local-nav {
@@ -42,6 +43,7 @@ a {
   height: 52px;
   border-bottom: 1px solid #ddd;
   padding: 0 1rem;
+  z-index: 11;
 
 }
 
@@ -74,12 +76,15 @@ a {
 }
 
 .scroll-section{
+  position: relative;
   padding-top: 50vh;
-  border: 1px solid crimson;
 }
 
 /* #scroll-section-0 */
 #scroll-section-0 h1 {
+  position: relative;
+  z-index: 5;
+  top: -10vh;
   font-size: 4rem;
   text-align: center;
 }
@@ -130,6 +135,7 @@ a {
 .desc-message {
   width: 50%;
   font-weight: bold;
+  opacity: 0;
 }
 
 #scroll-section-2 .b {
@@ -149,6 +155,12 @@ a {
 }
 
 /* scroll-section-3 */
+#scroll-section-3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .mid-message {
   max-width: 1000px;
   margin: 0 auto;
@@ -197,6 +209,28 @@ body#show-scene-2 #scroll-section-2 .sticky-elem,
 body#show-scene-3 #scroll-section-3 .sticky-elem {
   display: block;
 }
+
+
+
+/* 동영상 */
+.sticky-elem-canvas {
+  height: 100%;
+  top: 0;
+}
+
+
+.sticky-elem-canvas canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+}
+
+
+/* blend 이미지 */
+/* .image-blend-canvas {
+  
+} */
 
 
 /* pc버전 */
