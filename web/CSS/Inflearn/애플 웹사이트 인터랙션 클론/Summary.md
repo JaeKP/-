@@ -678,7 +678,7 @@ function playAnimation(){
 ```
 <br>
 
-| <img src="https://raw.githubusercontent.com/JaeKP/image_repo/main/img/220615browser.png" alt="220615browser" style="zoom: 33%;" /> | 브라우저 화면 기준으로 캔버스 크기가 조정되어 있다<br />즉, 브라우저 창의 높이만큼 채우기 위해 일정 비율이 줄어들었다. |
+| <img src="https://raw.githubusercontent.com/JaeKP/image_repo/main/img/220615browser.png" alt="220615browser" style="zoom: 25%;" /> | 브라우저 화면 기준으로 캔버스 크기가 조정되어 있다<br />즉, 브라우저 창의 높이만큼 채우기 위해 일정 비율이 줄어들었다. |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
 - 그래서 새로운 캔버스의 사이즈를 구해야 한다. (검정 영역)
@@ -687,7 +687,7 @@ function playAnimation(){
 
 <br>
 
-| <img src="https://raw.githubusercontent.com/JaeKP/image_repo/main/img/220615boxes.png" alt="220615boxes" style="zoom:33%;" /> | - 왼쪽 박스 출발 X 좌표: 검정 사각형 좌변 <br />- 왼쪽 박스 도착 X 좌표:  출발 좌표 - 박스 너비 <br />- 오른쪽 박스 출발 X 좌표: 검정 사각형 우변 <br />- 오른쪽 박스 도착 X좌표: 검정 사각형 우변 + 박스 너비 |
+| <img src="https://raw.githubusercontent.com/JaeKP/image_repo/main/img/220615boxes.png" alt="220615boxes" style="zoom: 25%;" /> | - 왼쪽 박스 출발 X 좌표: 검정 사각형 좌변 <br />- 왼쪽 박스 도착 X 좌표:  출발 좌표 - 박스 너비 <br />- 오른쪽 박스 출발 X 좌표: 검정 사각형 우변 <br />- 오른쪽 박스 도착 X좌표: 검정 사각형 우변 + 박스 너비 |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
 <br>
@@ -805,7 +805,7 @@ function playAnimation(){
 ```
 <br>
 
-| <img src="https://raw.githubusercontent.com/JaeKP/image_repo/main/img/220615sectionHeight.png" alt="220615sectionHeight" style="zoom: 33%;" /> | 먼저, 섹션 기준 캔버스가 어디있는지 확인한다. <br />캔버스가 브라우저 상단에 닿으면 애니메이션이 끝나야 하기 때문이다. <br />즉, 섹션 길이기준 캔버스의 높이 비율만큼 스크롤하면 애니메이션이 종료된다. |
+| <img src="https://raw.githubusercontent.com/JaeKP/image_repo/main/img/220615sectionHeight.png" alt="220615sectionHeight" style="zoom: 25%;" /> | 먼저, 섹션 기준 캔버스가 어디있는지 확인한다. <br />캔버스가 브라우저 상단에 닿으면 애니메이션이 끝나야 하기 때문이다. <br />즉, 섹션 길이기준 캔버스의 높이 비율만큼 스크롤하면 애니메이션이 종료된다. |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
 - 그러나 현재 캔버스 크기는 `transform: scale`로 크기가 조정되어 있는 상태이다. 
